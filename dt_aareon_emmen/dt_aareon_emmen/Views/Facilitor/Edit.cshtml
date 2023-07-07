@@ -1,0 +1,81 @@
+@{
+	ViewData["Title"] = "Sensor met Facilitor key bewerken";
+	Layout = "LayoutNoMenu";
+}
+
+<main class="d-flex">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="position-relative col-8 col-md-6 bg-white m-auto rounded-3 p-5">
+        		<a href="/Facilitor/Index/@ViewBag.buildingId/" class="position-absolute">
+					<span class="material-icons back-icon txt-clr-acc-500">
+						arrow_circle_left
+					</span>
+				</a>
+
+				<div class="row m-auto mb-4">
+					<div class="col-12">
+						<h1 class="txt-clr-main-700 col-12 text-center fw-semibold">Facilitor key bewerken</h1>
+					</div>
+				</div>
+				@using (Html.BeginForm("Edit", "Facilitor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				{
+					@if (!string.IsNullOrEmpty(ViewBag.error))
+					{
+						<div class="row">
+							<div class="col-12">
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									@ViewBag.error
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</div>
+						</div>
+					}
+					else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+					{
+						<label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+							@TempData["success"]
+							<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+						</label>
+					}
+
+					<div class="row">
+						<div class="mb-3">
+							<label for="sensors" class="form-label fw-bold">Kies sensor:</label>
+							<input type="text" list="sensorList" class="form-control" name="sensors" id="sensors" value="@ViewBag.sensorFacilitorId" placeholder="@ViewBag.sensorFacilitorId">
+							<datalist id="sensorList">
+								@foreach (var item in ViewBag.allSensors)
+								{
+									<option value="@item["friendlyname"]">@item["friendlyname"]</option>
+								}
+							</datalist>
+						</div>
+
+						<div class="mb-3">
+							<label for="facilitorKey" class="form-label fw-bold">Voeg Facilitor ID</label>
+							<input type="text" class="form-control" name="facilitorKey" id="facilitorKey" value="@ViewBag.facilitorId">
+						</div>
+
+						<div class="mb-3">
+							<label for="datatypes" class="form-label fw-bold">Kies datatype:</label>
+							<select class="w-100 bg-white border rounded-3 py-2 px-2" name="datatypes">
+								<option value="@ViewBag.dataType">@ViewBag.dataTypeName</option>
+								@foreach (var item in ViewBag.dataTypes)
+								{
+									<option value="@item["id"]">@item["type"]</option>
+								}
+							</select>
+						</div>
+					</div>
+
+					<div class="mt-2">
+						<button value="@ViewBag.buildingId" name="buildingId" class="btn btn-main btn-acc-300 w-100 txt-clr-main-100 text-uppercase fw-bold position-relative submit-button-backgroundcolor" type="submit">
+							<span class="mx-auto">Wijzigingen opslaan</span>
+                            <span class="material-icons align-middle card-title">edit</span>
+						</button>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</main>

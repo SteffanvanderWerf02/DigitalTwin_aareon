@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+@Html.Partial("Head.cshtml")
+<body class="align-items-center d-flex">
+  
+    <div class="container">
+        <div class="row mx-auto justify-content-center">
+            @* Content *@
+            <div class="col-12 col-md-6 col-sm-10">
+                <div class="mx-auto rounded-3 bg-white">@RenderBody()</div>
+            </div>
+        </div>
+    </div>
+        
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

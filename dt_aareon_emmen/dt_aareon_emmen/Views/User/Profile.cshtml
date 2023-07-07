@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Profiel";
+    Layout = "LayoutNoMenu";
+}
+<main class="d-flex m-auto p-2 rounded-3 overflow-auto">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 col-md-6 bg-white m-auto rounded-3 p-5">
+                <a href="/User/Settings" class="position-absolute">
+                    <span class="material-icons back-icon txt-clr-acc-500">
+                        arrow_circle_left
+                    </span>
+                </a>
+                <div class="row m-auto mb-4">
+                    <div class="col-12">
+                        <h1 class="txt-clr-main-700 col-12 text-center fw-semibold">Profiel</h1>
+                    </div>
+                </div>
+                @using (Html.BeginForm("ChangeProfile", "User", FormMethod.Post))
+                {
+                        @if (!string.IsNullOrEmpty(ViewBag.error))
+                        {
+                            <div class="row m-auto">
+                                <div class="col-12">
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        @ViewBag.error
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    <div class="row m-auto">
+                        <div class="col-12 col-lg-4">
+                            <label class="fw-bold" for="change-profile-username">Naam</label>
+                        </div> 
+                        <div class="col-12 col-lg-8">
+                            <input class="w-75 mb-4 px-3 px-2 py-1 border border-secondary rounded-3" type="text" name="username" id="change-profile-username"
+                                value=@ViewBag.username placeholder="Gebruikersnaam...">
+                        </div> 
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-12 col-lg-4">
+                            <label class="fw-bold" for="change-profile-email">Email</label>
+                        </div> 
+                        <div class="col-12 col-lg-8">
+                            <p id="change-profile-email" class="w-100 text-break fst-italic">@ViewBag.mail</p>
+                        </div>
+                    </div>
+                }
+                <div class="row m-auto mt-4">
+                    <div class=" col-12 col-lg-6 d-flex justify-content-start"> 
+                        <input class="submit-button-backgroundcolor txt-clr-main-100 btn-main fw-bold py-2 px-3 mb-4 text-uppercase text-center border-0 rounded-3" type="submit" name="submit" value="Opslaan" onclick="document.querySelector('form').submit()">
+                    </div>
+                    <div class=" col-12 col-lg-6 d-flex justify-content-start"> 
+                        <a href="/User/Password">
+                            <button class="bg-clr-main-500 txt-clr-main-100 btn-main fw-bold py-2 px-3 mb-4 text-uppercase text-center border-0 rounded-3">Wachtwoord wijzigen</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,81 @@
+@{
+	ViewData["Title"] = "Facilitor key toevoegen aan sensor";
+	Layout = "LayoutNoMenu";
+}
+
+<main class="d-flex">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="position-relative col-8 col-md-6 bg-white m-auto rounded-3 p-5">
+        		<a href="/Facilitor/Index/@ViewBag.buildingId/" class="position-absolute">
+					<span class="material-icons back-icon txt-clr-acc-500">
+						arrow_circle_left
+					</span>
+				</a>
+
+				<div class="row m-auto mb-4">
+					<div class="col-12">
+						<h1 class="txt-clr-main-700 col-12 text-center fw-semibold">Facilitor key toevoegen</h1>
+					</div>
+				</div>
+				@using (Html.BeginForm("Create", "Facilitor", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				{
+					@if (!string.IsNullOrEmpty(ViewBag.error))
+					{
+						<div class="row">
+							<div class="col-12">
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									@ViewBag.error
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</div>
+						</div>
+					}
+					else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+					{
+						<label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+							@TempData["success"]
+							<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+						</label>
+					}
+
+					<div class="row">
+						<div class="mb-3">
+							<label for="sensors" class="form-label fw-bold">Kies sensor:</label>
+                            <select class="w-100 bg-white border rounded-3 py-2 px-2" name="sensors">
+                                @foreach (var item in ViewBag.sensors)
+                                {
+                                    <option value='@item["friendlyname"]'>@item["friendlyname"]</option>
+                                }
+                            </select>     
+						</div>
+
+						<div class="mb-3">
+							<label for="facilitorKey" class="form-label fw-bold">Voeg Facilitor ID</label>
+							<input type="text" class="form-control" name="facilitorKey" id="facilitorKey">
+						</div>
+
+                       <div class="mb-3">
+							<label for="dataTypeId" class="form-label fw-bold">Data type</label>
+							<select class="w-100 bg-white border rounded-3 py-2 px-2" name="dataTypeId">
+                                @foreach (var item in ViewBag.dataTypes)
+                                {
+                                    <option value='@item["id"]'>@item["type"]</option>
+                                }
+                            </select>  
+						</div>
+					</div>
+
+					<div class="mt-2">
+						<button value="@ViewBag.buildingId" name="buildingId" class="btn btn-main btn-acc-300 w-100 txt-clr-main-100 text-uppercase fw-bold position-relative submit-button-backgroundcolor" type="submit">
+							<span class="mx-auto">Voeg Facilitor key toe</span>
+							<span class="material-icons position-absolute">
+								add_circle
+							</span>
+						</button>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</main>

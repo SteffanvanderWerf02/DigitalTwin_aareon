@@ -1,0 +1,27 @@
+@{
+	ViewData["Title"] = "Coordinaten Instructies";
+	Layout = "LayoutNoMenu";
+}
+<div class="container-fluid pb-4" style="width:90%">
+	<div class="row">
+		<div class="col-12 rounded bg-white h-100 border-bottom py-5">
+			<div class="row">
+				<div class="col-1">
+					<a href="/Room/Create/@ViewBag.buildingId">
+						<span class="material-icons back-icon txt-clr-acc-500">
+							arrow_circle_left
+						</span>
+					</a>
+				</div>
+				<div class="col-10">
+					<h1 class="w-100 text-center txt-clr-main-700 fw-semibold">Ruimte Coördinaten Instructies</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<iframe src="~/files/room_coordinate_instructions.pdf" style="width: 100%;height: 80vh;border: 1px solid black;"></iframe>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

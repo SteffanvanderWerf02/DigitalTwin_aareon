@@ -1,0 +1,157 @@
+@{
+	ViewData["Title"] = "Ruimte";
+	Layout = "LayoutNoMenu";
+}
+
+<main class="container-fluid mw-90">
+	<div class="row mb-5">
+		<div class="col-12 rounded-3 bg-white p-5">
+			@* No data screen *@
+			@if (ViewBag.data.Count == 0)
+			{
+				<div class="row pb-2">
+					<div class="col-12">
+						<h3>
+							Er kan geen (actuele) sensordata voor de kamer worden
+							gevonden.
+						</h3>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-12 txt-clr-main-100">
+						@{
+							string path = Context.Request.Path.ToString();
+							path = path.Substring(0, path.LastIndexOf('/'));
+							path = "/Building/Map/" + path.Substring(path.LastIndexOf('/') + 1, path.Length - path.LastIndexOf('/') - 1);
+						}
+						<a href="@path" class="d-inline-block text-uppercase bg-clr-main-500 txt-clr-main-100 btn-main fw-bold rounded-3 p-2">
+							&lsaquo; Ga terug
+						</a>
+					</div>
+				</div>
+			}
+			@* Data screen *@
+			else
+			{
+				@* Check if one of the sensors is marking the room as occupied*@
+				bool isOccupied = false;
+				for (int i = 0; i < ViewBag.data.Count; i++)
+				{
+					if (ViewBag.data[i]["occupied"] == "True" && Convert.ToInt32(ViewBag.data[i]["motion_state"]) != 0)
+					{
+						isOccupied = true;
+						break;
+					}
+				}
+				<div class="row">
+					<div class="col-10 justify-content-lg-start justify-content-center d-flex">
+						<a class="me-5" href="/building/map/@string.Format(ViewBag.roominfo[0]["building_id"])">
+							<img src="~/icons/backbtn-blue.png" height="50px">
+						</a>
+						<h1 class="txt-clr-main-700 fw-semibold mb-2">
+							@ViewBag.roominfo[0]["room_number"] -
+							@ViewBag.roominfo[0]["name"]
+						</h1>
+					</div>
+					<div class="col-2 d-flex justify-content-end align-items-center">
+						<a title="geschiedenis"
+						   href="@ViewBag.history">
+							<img height="50px" src=~/icons/geschiedenis.png alt="" />
+						</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 text-center col-sm-12 d-block">
+						@* Map *@
+						@{
+							string occupancyFilter = "";
+							string occupancyText = "";
+
+							string occupancyStyle = isOccupied ? "txt-clr-acc-400" : "txt-clr-acc-600";
+
+
+							@if (ViewBag.mSensor.Count != 0)
+							{
+								occupancyText = isOccupied ? "Bezet" : "Vrij";
+								occupancyFilter = isOccupied ? "filter-overlay-red" : "filter-overlay-green";
+							}
+						}
+						<h3 class="mt-2 text-center fw-bold @occupancyStyle">@occupancyText</h3>
+						<img class="@occupancyFilter w-50 mb-2 mx-auto"
+							 src="@ViewBag.roominfo[0]["image_path"]"
+							 alt="ruimte" />
+					</div>
+					@* Data *@
+					<div class="col-md-6 col-sm-12">
+						<div class="row">
+							<div class="col-xl-6 col-md-12">
+								<h3 class="fw-bold">Sensoren</h3>
+								<ul>
+									@if (ViewBag.mSensor.Count != 0)
+									{
+										@for (int j = 0; j < ViewBag.mSensor.Count; j++)
+										{
+											string sensorStateClass = bool.Parse(ViewBag.mSensor[j]["state"]) ? "txt-clr-acc-600" : "txt-clr-acc-400";
+											string sensorStateText = bool.Parse(ViewBag.mSensor[j]["state"]) ? "ONLINE" : "OFFLINE";
+
+											<li ps-1>
+												Motion sensor &quot;@(ViewBag.mSensor[j]["friendlyname"])&quot; - <span class="@sensorStateClass"> @sensorStateText </span>
+											</li>
+										}
+									}
+									@if (ViewBag.cSensor.Count != 0)
+									{
+										@for (int j = 0; j < ViewBag.cSensor.Count; j++)
+										{
+											string sensorStateClass = bool.Parse(ViewBag.cSensor[j]["state"]) ? "txt-clr-acc-600" : "txt-clr-acc-400";
+											string sensorStateText = bool.Parse(ViewBag.cSensor[j]["state"]) ? "ONLINE" : "OFFLINE";
+
+											<li ps-1>
+												CO<sup>2</sup> sensor &quot;@(
+									ViewBag.cSensor[j]["friendlyname"]
+									)&quot; - <span class="@sensorStateClass"> @sensorStateText </span>
+											</li>
+										}
+									}
+
+								</ul>
+								<h3 class="fw-bold">Informatie CO<sup>2</sup> data</h3>
+								<p>
+									De temperatuur is <strong>@(ViewBag.data[0]["temperature"] == null || ViewBag.data[0]["temperature"] == "" ? "Undefined" : ViewBag.data[0]["temperature"]) ℃</strong> <br />
+									De CO&sup2; is <strong>@(ViewBag.data[0]["co2"] == null || ViewBag.data[0]["co2"] == "" ? "Undefined" : ViewBag.data[0]["co2"]) PPM</strong> <br />
+									De luchtvochtigheid is <strong>@(ViewBag.data[0]["humidity"] == null || ViewBag.data[0]["humidity"] == "" ? "Undefined" : ViewBag.data[0]["humidity"])%</strong>
+								</p>
+							</div>
+							<div class="col-xl-6 col-md-12">
+								<h3 class="fw-bold">Laatste update</h3>
+								@if (ViewBag.mSensor.Count != 0)
+								{
+									<p class="mb-0">
+										Bezetting: @(ViewBag.data[0]["motion_update_date"] == null || ViewBag.data[0]["motion_update_date"] == "" ? "Undefined" : ViewBag.data[0]["motion_update_date"])
+									</p>
+								}
+								@if (ViewBag.cSensor.Count != 0)
+								{
+									<p>
+										Co2: @(ViewBag.data[0]["co2_update_date"] == null || ViewBag.data[0]["co2_update_date"] == "" ? "Undefined" : ViewBag.data[0]["co2_update_date"])
+									</p>
+								}
+								<div class="w-75 mt-5 col-2 d-flex align-items-center">
+									<a class="w-100 text-center bg-clr-main-500 rounded-3 text-white p-2 me-4 btn-main" asp-controller="Room" asp-action="Edit" asp-route-buildingId="@ViewBag.buildingId" asp-route-roomNum="@ViewBag.roomNum">
+										Ruimte bewerken
+									</a>
+								</div>
+
+								<div class="w-75 mt-2 col-2 d-flex align-items-center">
+									<a class="w-100 text-center bg-danger rounded-3 text-white p-2 me-4 btn-main" asp-controller="Room" onclick="return confirm('Weet u zeker dat u deze ruimte wilt verwijderen?')" asp-action="Delete" asp-route-buildingId="@ViewBag.buildingId">
+										Ruimte verwijderen
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</main>

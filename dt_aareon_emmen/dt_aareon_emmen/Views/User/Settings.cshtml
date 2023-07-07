@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Instellingen";
+    Layout = "LayoutNoMenu";
+}
+
+<main class="d-flex">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="position-relative col-8 col-xl-5 col-md-6 bg-white m-auto rounded-3 p-5">
+                <a href="/Building/Index" class="position-absolute inset-top-left">
+                    <span class="material-icons back-icon txt-clr-acc-500">
+                        arrow_circle_left
+                    </span>
+                </a>
+                <div class="row justify-content-center">
+                    <img class="col-3" src="~/icons/logo.png" alt="Aareon Logo" />`
+                </div>
+                <div class="row justify-content-center mb-4">
+                    <h1 class="txt-clr-main-700 col-12 text-center fw-semibold">Instellingen</h1>
+                </div>
+                @if(ViewBag.role == 2){
+                    <div class="row mb-3">
+                        <a href="/user/index">
+                            <div class="text-uppercase bg-clr-main-500 btn-main fw-bold rounded-3 d-flex rh-6 px-2">
+                                <div class="col-1"></div>
+                                <p class="col-10 m-auto text-center txt-clr-main-100">Beheer</p>
+                                <span class="material-icons text-white m-auto">
+                                    verified_user
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                }
+                <div class="row mb-3">
+                    <a href="/User/Profile">
+                        <div class="text-uppercase bg-clr-main-500 btn-main fw-bold rounded-3 d-flex rh-6 px-2 ">
+                            <div class="col-1"></div>
+                            <p class="col-10 m-auto text-center txt-clr-main-100">Profiel</p>
+                            <span class="material-icons text-white m-auto text-decoration-none">
+                                person
+                            </span>
+                        </div>
+                    </a>
+                </div>   
+                <div class="row mb-3">
+                    <a asp-controller="User" asp-action="ClearSession">
+                        <div class="text-uppercase bg-clr-acc-400 btn-main fw-bold rounded-3 d-flex rh-6 px-2">
+                            <div class="col-1"></div>
+                            <p class="col-10 m-auto text-center txt-clr-main-100">Uitloggen</p>
+                            <span class="material-icons text-white m-auto">
+                                logout
+                            </span>
+                        </div>
+                    </a>
+                </div> 
+            </div>
+        </div>
+    </div>
+</main>

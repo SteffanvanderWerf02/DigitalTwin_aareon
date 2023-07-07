@@ -1,0 +1,101 @@
+@{
+	ViewData["Title"] = "Sensor bewerken";
+	Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row g-0">
+	<div class="col-1">
+		<a href="/Sensor/Index/@ViewBag.buildingId/" class="position-absolute">
+			<span class="material-icons back-icon txt-clr-acc-500">
+				arrow_circle_left
+			</span>
+		</a>
+	</div>
+	<div class="col-10 text-center">
+		<h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Sensor bewerken - @(ViewBag.sensor["friendlyname"])</h1>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="mx-auto bg-clr-main-500 w-100 p-4 rounded-3" style="max-width: 500px;">
+			@using (Html.BeginForm("Update", "Sensor", new { friendlyname = @ViewBag.sensor["friendlyname"], buildingId = ViewBag.buildingId }, FormMethod.Post))
+			{
+				@if (!string.IsNullOrEmpty(ViewBag.error))
+                {
+                    <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                        @ViewBag.error
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+                {
+                    <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                        @TempData["success"]
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }
+				@*string room_nr, string serial, string type_id*@
+
+				@if (!string.IsNullOrEmpty(ViewBag.error))
+				{
+					<label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+						@ViewBag.error
+						<button type="button"
+								class="btn-close top-0 bottom-0 my-auto"
+								data-bs-dismiss="alert"
+								aria-label="Close">
+						</button>
+					</label>
+				}
+				
+				<div class="mb-3">
+                    <label for="facilitorKey" class="form-label text-white fw-bold">Facilitor key toevoegen/bewerken (optioneel)</label>
+                    <input type="text" placeholder="Facilitor key" class="form-control" name="facilitorKey" id="facilitorKey">
+                </div>        
+
+				<div class="mb-3">
+					<label for="room_nr" class="form-label text-white fw-bold">Ruimtenummer</label>
+					<input type="text" list=rooms class="form-control" name="room_nr" id="room_nr" value='@ViewBag.sensor["room_number"]' placeholder="Ruimtenummer...">
+					<datalist id=rooms>
+						@foreach (Dictionary<string, string> dict in ViewBag.rooms)
+						{
+							<option value='dict["room_number"]'>@dict["room_number"]</option>
+						}
+					</datalist>
+				</div>
+
+				<div class="mb-3">
+					<label for="serial" class="form-label text-white fw-bold">Serienummer</label>
+					<input type="text" class="form-control" name="serial" id="serial" value="@ViewBag.sensor["serial_number"]" placeholder="Serienummer...">
+				</div>
+				<div class="mb-3">
+					<label for="sensor_type" class="form-label text-white fw-bold">Type sensor</label>
+					<select class="form-control" name="sensor_type" id="sensor_type">
+						@foreach (Dictionary<string, string> sensortype in ViewBag.sensorTypes)
+						{
+							<!option value="@(sensortype["id"])" @(@ViewBag.sensor["type_name"] == sensortype["name"] ? "selected" : "")>
+								@{
+									string finalString = "";
+									string[] str = sensortype["name"].Split("_");
+									for (int i = 0; i < str.Length; i++)
+									{
+										finalString += System.Globalization.CultureInfo.CurrentCulture.TextInfo.ToTitleCase(str[i].ToLower());
+										finalString += ' ';
+									}
+								}
+								@(finalString)
+							</!option>
+						}
+					</select>
+				</div>
+				<div class="mb-3">
+					<button class="btn w-100 btn-main text-uppercase fw-bold submit-button-backgroundcolor d-flex justify-content-between align-items-center" type="submit">
+						<span class="mx-auto">Bewerkeningen opslaan</span>
+						<span class="material-icons align-middle card-title">edit</span>
+					</button>
+				</div>
+			}
+		</div>
+	</div>
+</div>

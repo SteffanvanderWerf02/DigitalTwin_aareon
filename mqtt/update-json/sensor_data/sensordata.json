@@ -1,0 +1,1254 @@
+{
+    "sensors": {
+        "K102-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 22017,
+                "illuminance_lux": 159,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "no_occupancy_since": {
+                    "undefined": ""
+                },
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 25.36,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K102-MOTION",
+                "topic": "zigbee2mqtt/K102-MOTION"
+            }
+        },
+        "K102-2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 14512,
+                "illuminance_lux": 28,
+                "linkquality": 123,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.34,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K102-2-MOTION",
+                "topic": "zigbee2mqtt/K102-2-MOTION"
+            }
+        },
+        "K102-3-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 15347,
+                "illuminance_lux": 34,
+                "linkquality": 149,
+                "motion_sensitivity": "max",
+                "occupancy": true,
+                "occupancy_timeout": 600,
+                "temperature": 25.61,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K102-3-MOTION",
+                "topic": "zigbee2mqtt/K102-3-MOTION"
+            }
+        },
+        "K103-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 23552,
+                "illuminance_lux": 227,
+                "linkquality": 25,
+                "motion_sensitivity": "max",
+                "occupancy": false,
+                "occupancy_timeout": 600,
+                "temperature": 23.09,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K103-MOTION",
+                "topic": "zigbee2mqtt/K103-MOTION"
+            }
+        },
+        "K103-2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 24456,
+                "illuminance_lux": 279,
+                "linkquality": 123,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.84,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K103-2-MOTION",
+                "topic": "zigbee2mqtt/K103-2-MOTION"
+            }
+        },
+        "K11-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 24582,
+                "illuminance_lux": 287,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 22.83,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K11-MOTION",
+                "topic": "zigbee2mqtt/K11-MOTION"
+            }
+        },
+        "K12-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 22598,
+                "illuminance_lux": 182,
+                "linkquality": 127,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 24.86,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K12-MOTION",
+                "topic": "zigbee2mqtt/K12-MOTION"
+            }
+        },
+        "K15-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 23300,
+                "illuminance_lux": 214,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": true,
+                "occupancy_timeout": 0,
+                "temperature": 17.26,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K15-MOTION",
+                "topic": "zigbee2mqtt/K15-MOTION"
+            }
+        },
+        "K16-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 21800,
+                "illuminance_lux": 151,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.09,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K16-MOTION",
+                "topic": "zigbee2mqtt/K16-MOTION"
+            }
+        },
+        "K18-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 23896,
+                "illuminance_lux": 245,
+                "linkquality": 145,
+                "motion_sensitivity": "max",
+                "occupancy": true,
+                "occupancy_timeout": 600,
+                "temperature": 25.61,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K18-MOTION",
+                "topic": "zigbee2mqtt/K18-MOTION"
+            }
+        },
+        "K2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 7380,
+                "illuminance_lux": 5,
+                "linkquality": 43,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.09,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K2-MOTION",
+                "topic": "zigbee2mqtt/K2-MOTION"
+            }
+        },
+        "K25-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 17761,
+                "illuminance_lux": 60,
+                "linkquality": 36,
+                "motion_sensitivity": "high",
+                "occupancy": true,
+                "occupancy_timeout": 0,
+                "temperature": 21.57,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K25-MOTION",
+                "topic": "zigbee2mqtt/K25-MOTION"
+            }
+        },
+        "K26-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 18435,
+                "illuminance_lux": 70,
+                "linkquality": 123,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 21.57,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K26-MOTION",
+                "topic": "zigbee2mqtt/K26-MOTION"
+            }
+        },
+        "K3-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 18081,
+                "illuminance_lux": 64,
+                "linkquality": 32,
+                "motion_sensitivity": "max",
+                "occupancy": true,
+                "occupancy_timeout": 600,
+                "temperature": 23.84,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K3-MOTION",
+                "topic": "zigbee2mqtt/K3-MOTION"
+            }
+        },
+        "K38-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 28716,
+                "illuminance_lux": 744,
+                "linkquality": 127,
+                "motion_sensitivity": "high",
+                "occupancy": true,
+                "occupancy_timeout": 0,
+                "temperature": 24.86,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K38-MOTION",
+                "topic": "zigbee2mqtt/K38-MOTION"
+            }
+        },
+        "K38-2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 20206,
+                "illuminance_lux": 105,
+                "linkquality": 32,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.84,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K38-2-MOTION",
+                "topic": "zigbee2mqtt/K38-2-MOTION"
+            }
+        },
+        "K39-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 18630,
+                "illuminance_lux": 73,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 20.81,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K39-MOTION",
+                "topic": "zigbee2mqtt/K39-MOTION"
+            }
+        },
+        "K39-2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 22270,
+                "illuminance_lux": 169,
+                "linkquality": 123,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 21.31,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K39-2-MOTION",
+                "topic": "zigbee2mqtt/K39-2-MOTION"
+            }
+        },
+        "K4-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 15453,
+                "illuminance_lux": 35,
+                "linkquality": 76,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 21.31,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K4-MOTION",
+                "topic": "zigbee2mqtt/K4-MOTION"
+            }
+        },
+        "K42-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 23673,
+                "illuminance_lux": 233,
+                "linkquality": 40,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.84,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K42-MOTION",
+                "topic": "zigbee2mqtt/K42-MOTION"
+            }
+        },
+        "K47-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 25015,
+                "illuminance_lux": 317,
+                "linkquality": 29,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 24.35,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K47-MOTION",
+                "topic": "zigbee2mqtt/K47-MOTION"
+            }
+        },
+        "K48-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 25333,
+                "illuminance_lux": 341,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 24.1,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K48-MOTION",
+                "topic": "zigbee2mqtt/K48-MOTION"
+            }
+        },
+        "K5-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 18893,
+                "illuminance_lux": 77,
+                "linkquality": 40,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 22.58,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K5-MOTION",
+                "topic": "zigbee2mqtt/K5-MOTION"
+            }
+        },
+        "K51-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 21227,
+                "illuminance_lux": 133,
+                "linkquality": 123,
+                "motion_sensitivity": "max",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.09,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K51-MOTION",
+                "topic": "zigbee2mqtt/K51-MOTION"
+            }
+        },
+        "K53-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 26474,
+                "illuminance_lux": 444,
+                "linkquality": 87,
+                "motion_sensitivity": "high",
+                "occupancy": true,
+                "occupancy_timeout": 0,
+                "temperature": 24.35,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K53-MOTION",
+                "topic": "zigbee2mqtt/K53-MOTION"
+            }
+        },
+        "K53-2-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 28387,
+                "illuminance_lux": 690,
+                "linkquality": 72,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 23.84,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K53-2-MOTION",
+                "topic": "zigbee2mqtt/K53-2-MOTION"
+            }
+        },
+        "K6-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 20585,
+                "illuminance_lux": 114,
+                "linkquality": 40,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 21.31,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K6-MOTION",
+                "topic": "zigbee2mqtt/K6-MOTION"
+            }
+        },
+        "K10-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 18520,
+                "illuminance_lux": 71,
+                "linkquality": 120,
+                "motion_sensitivity": "high",
+                "occupancy": false,
+                "occupancy_timeout": 0,
+                "temperature": 25.11,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K10-MOTION",
+                "topic": "zigbee2mqtt/K10-MOTION"
+            }
+        },
+        "K101-MOTION": {
+            "state": "online",
+            "data": {
+                "battery": 100,
+                "illuminance": 19376,
+                "illuminance_lux": 87,
+                "linkquality": 127,
+                "motion_sensitivity": "high",
+                "occupancy": true,
+                "occupancy_timeout": 600,
+                "temperature": 25.11,
+                "update": {
+                    "state": "idle"
+                },
+                "sensor": "K101-MOTION",
+                "topic": "zigbee2mqtt/K101-MOTION"
+            }
+        },
+        "K102-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 3,
+                "humidity": 64.3,
+                "linkquality": 120,
+                "temperature": 23.9,
+                "voc": 1,
+                "sensor": "K102-CO2",
+                "topic": "zigbee2mqtt/K102-CO2"
+            }
+        },
+        "K103-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 506,
+                "humidity": 59.89,
+                "linkquality": 171,
+                "temperature": 22.82,
+                "voltage": 3500,
+                "sensor": "K103-CO2",
+                "topic": "zigbee2mqtt/K103-CO2"
+            }
+        },
+        "K11-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 361,
+                "formaldehyd": 2,
+                "humidity": 68.3,
+                "linkquality": 87,
+                "temperature": 23.2,
+                "voc": 5,
+                "sensor": "K11-CO2",
+                "topic": "zigbee2mqtt/K11-CO2"
+            }
+        },
+        "K12-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 1,
+                "humidity": 38.3,
+                "linkquality": 178,
+                "temperature": 25.7,
+                "voc": 3,
+                "sensor": "K12-CO2",
+                "topic": "zigbee2mqtt/K12-CO2"
+            }
+        },
+        "K15-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 1,
+                "humidity": 72.2,
+                "linkquality": 123,
+                "temperature": 21,
+                "voc": 4,
+                "sensor": "K15-CO2",
+                "topic": "zigbee2mqtt/K15-CO2"
+            }
+        },
+        "K16-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 2,
+                "humidity": 68.4,
+                "linkquality": 47,
+                "temperature": 22.3,
+                "voc": 2,
+                "sensor": "K16-CO2",
+                "topic": "zigbee2mqtt/K16-CO2"
+            }
+        },
+        "K18-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 366,
+                "formaldehyd": 2,
+                "humidity": 39.9,
+                "linkquality": 40,
+                "temperature": 25.1,
+                "voc": 2,
+                "sensor": "K18-CO2",
+                "topic": "zigbee2mqtt/K18-CO2"
+            }
+        },
+        "K2-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 362,
+                "formaldehyd": 3,
+                "humidity": 67.7,
+                "linkquality": 76,
+                "temperature": 22.2,
+                "voc": 2,
+                "sensor": "K2-CO2",
+                "topic": "zigbee2mqtt/K2-CO2"
+            }
+        },
+        "K25-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 362,
+                "formaldehyd": 4,
+                "humidity": 47,
+                "linkquality": 29,
+                "temperature": 22.2,
+                "voc": 3,
+                "sensor": "K25-CO2",
+                "topic": "zigbee2mqtt/K25-CO2"
+            }
+        },
+        "K26-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 615,
+                "formaldehyd": 9,
+                "humidity": 71.9,
+                "linkquality": 127,
+                "temperature": 21.7,
+                "voc": 11,
+                "sensor": "K26-CO2",
+                "topic": "zigbee2mqtt/K26-CO2"
+            }
+        },
+        "K3-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 3,
+                "humidity": 69.5,
+                "linkquality": 120,
+                "temperature": 23,
+                "voc": 4,
+                "sensor": "K3-CO2",
+                "topic": "zigbee2mqtt/K3-CO2"
+            }
+        },
+        "K38-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 369,
+                "formaldehyd": 1,
+                "humidity": 51.1,
+                "linkquality": 36,
+                "temperature": 21.6,
+                "voc": 3,
+                "sensor": "K38-CO2",
+                "topic": "zigbee2mqtt/K38-CO2"
+            }
+        },
+        "K39-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 357,
+                "formaldehyd": 1,
+                "humidity": 49.2,
+                "linkquality": 65,
+                "temperature": 23,
+                "voc": 5,
+                "sensor": "K39-CO2",
+                "topic": "zigbee2mqtt/K39-CO2"
+            }
+        },
+        "K4-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 1,
+                "humidity": 63.5,
+                "linkquality": 32,
+                "temperature": 23.6,
+                "voc": 1,
+                "sensor": "K4-CO2",
+                "topic": "zigbee2mqtt/K4-CO2"
+            }
+        },
+        "K42-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 488,
+                "formaldehyd": 6,
+                "humidity": 52.1,
+                "linkquality": 91,
+                "temperature": 24.7,
+                "voc": 8,
+                "sensor": "K42-CO2",
+                "topic": "zigbee2mqtt/K42-CO2"
+            }
+        },
+        "K47-CO2": {
+            "state": "offline",
+            "data": {
+                "battery_low": false,
+                "co2": 427,
+                "humidity": 39.99,
+                "linkquality": 29,
+                "temperature": 23.52,
+                "voltage": 25500,
+                "sensor": "K47-CO2",
+                "topic": "zigbee2mqtt/K47-CO2"
+            }
+        },
+        "K48-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 3,
+                "humidity": 56.9,
+                "linkquality": 32,
+                "temperature": 24.9,
+                "voc": 3,
+                "sensor": "K48-CO2",
+                "topic": "zigbee2mqtt/K48-CO2"
+            }
+        },
+        "K5-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 357,
+                "formaldehyd": 2,
+                "humidity": 68.4,
+                "linkquality": 40,
+                "temperature": 22.4,
+                "voc": 3,
+                "sensor": "K5-CO2",
+                "topic": "zigbee2mqtt/K5-CO2"
+            }
+        },
+        "K51-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 561,
+                "humidity": 63.63,
+                "linkquality": 40,
+                "temperature": 23.96,
+                "voltage": 3600,
+                "sensor": "K51-CO2",
+                "topic": "zigbee2mqtt/K51-CO2"
+            }
+        },
+        "K53-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 941,
+                "humidity": 52.73,
+                "linkquality": 123,
+                "temperature": 23.09,
+                "voltage": 3600,
+                "sensor": "K53-CO2",
+                "topic": "zigbee2mqtt/K53-CO2"
+            }
+        },
+        "K6-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 4,
+                "humidity": 73.4,
+                "linkquality": 87,
+                "temperature": 21.9,
+                "voc": 2,
+                "sensor": "K6-CO2",
+                "topic": "zigbee2mqtt/K6-CO2"
+            }
+        },
+        "K10-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 362,
+                "formaldehyd": 3,
+                "humidity": 63.3,
+                "linkquality": 123,
+                "temperature": 24.1,
+                "voc": 3,
+                "sensor": "K10-CO2",
+                "topic": "zigbee2mqtt/K10-CO2"
+            }
+        },
+        "K101-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 358,
+                "formaldehyd": 2,
+                "humidity": 56.2,
+                "linkquality": 123,
+                "temperature": 23.4,
+                "voc": 5,
+                "sensor": "K101-CO2",
+                "topic": "zigbee2mqtt/K101-CO2"
+            }
+        },
+        "K64-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 4,
+                "humidity": 62.1,
+                "linkquality": 29,
+                "temperature": 23.3,
+                "voc": 4,
+                "sensor": "K64-CO2",
+                "topic": "zigbee2mqtt/K64-CO2"
+            }
+        },
+        "K64-2-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 359,
+                "formaldehyd": 3,
+                "humidity": 62.3,
+                "linkquality": 29,
+                "temperature": 24.9,
+                "voc": 1,
+                "sensor": "K64-2-CO2",
+                "topic": "zigbee2mqtt/K64-2-CO2"
+            }
+        },
+        "K63-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 3,
+                "humidity": 64.2,
+                "linkquality": 40,
+                "temperature": 24.5,
+                "voc": 1,
+                "sensor": "K63-CO2",
+                "topic": "zigbee2mqtt/K63-CO2"
+            }
+        },
+        "K62-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 665,
+                "formaldehyd": 10,
+                "humidity": 34.3,
+                "linkquality": 51,
+                "temperature": 26,
+                "voc": 8,
+                "sensor": "K62-CO2",
+                "topic": "zigbee2mqtt/K62-CO2"
+            }
+        },
+        "K62-2-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 4,
+                "humidity": 63.6,
+                "linkquality": 32,
+                "temperature": 22,
+                "voc": 1,
+                "sensor": "K62-2-CO2",
+                "topic": "zigbee2mqtt/K62-2-CO2"
+            }
+        },
+        "K61-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 359,
+                "formaldehyd": 12,
+                "humidity": 37.9,
+                "linkquality": 47,
+                "temperature": 25.6,
+                "voc": 5,
+                "sensor": "K61-CO2",
+                "topic": "zigbee2mqtt/K61-CO2"
+            }
+        },
+        "K60-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 364,
+                "formaldehyd": 3,
+                "humidity": 40.1,
+                "linkquality": 51,
+                "temperature": 24.7,
+                "voc": 2,
+                "sensor": "K60-CO2",
+                "topic": "zigbee2mqtt/K60-CO2"
+            }
+        },
+        "K60-2-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 1,
+                "humidity": 39.6,
+                "linkquality": 47,
+                "temperature": 24.6,
+                "voc": 19,
+                "sensor": "K60-2-CO2",
+                "topic": "zigbee2mqtt/K60-2-CO2"
+            }
+        },
+        "K9-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 361,
+                "formaldehyd": 2,
+                "humidity": 42.2,
+                "linkquality": 25,
+                "temperature": 24.2,
+                "voc": 3,
+                "sensor": "K9-CO2",
+                "topic": "zigbee2mqtt/K9-CO2"
+            }
+        },
+        "K104-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 1,
+                "humidity": 47.6,
+                "linkquality": 47,
+                "temperature": 28.7,
+                "voc": 4,
+                "sensor": "K104-CO2",
+                "topic": "zigbee2mqtt/K104-CO2"
+            }
+        },
+        "K49-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 3,
+                "humidity": 61,
+                "linkquality": 123,
+                "temperature": 23.7,
+                "voc": 3,
+                "sensor": "K49-CO2",
+                "topic": "zigbee2mqtt/K49-CO2"
+            }
+        },
+        "K29-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 2,
+                "humidity": 62.9,
+                "linkquality": 123,
+                "temperature": 23.7,
+                "voc": 5,
+                "sensor": "K29-CO2",
+                "topic": "zigbee2mqtt/K29-CO2"
+            }
+        },
+        "K28-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 4,
+                "humidity": 60,
+                "linkquality": 123,
+                "temperature": 25.2,
+                "voc": 5,
+                "sensor": "K28-CO2",
+                "topic": "zigbee2mqtt/K28-CO2"
+            }
+        },
+        "K27-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 3,
+                "humidity": 37.1,
+                "linkquality": 98,
+                "temperature": 25,
+                "voc": 5,
+                "sensor": "K27-CO2",
+                "topic": "zigbee2mqtt/K27-CO2"
+            }
+        },
+        "K30-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 3,
+                "humidity": 59.8,
+                "linkquality": 120,
+                "temperature": 23.9,
+                "voc": 1,
+                "sensor": "K30-CO2",
+                "topic": "zigbee2mqtt/K30-CO2"
+            }
+        },
+        "K31-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 365,
+                "formaldehyd": 3,
+                "humidity": 62.7,
+                "linkquality": 127,
+                "temperature": 24.1,
+                "voc": 5,
+                "sensor": "K31-CO2",
+                "topic": "zigbee2mqtt/K31-CO2"
+            }
+        },
+        "K32-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 11,
+                "humidity": 48.2,
+                "linkquality": 40,
+                "temperature": 23.2,
+                "voc": 4,
+                "sensor": "K32-CO2",
+                "topic": "zigbee2mqtt/K32-CO2"
+            }
+        },
+        "K33-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 364,
+                "formaldehyd": 3,
+                "humidity": 61,
+                "linkquality": 123,
+                "temperature": 23.7,
+                "voc": 4,
+                "sensor": "K33-CO2",
+                "topic": "zigbee2mqtt/K33-CO2"
+            }
+        },
+        "K34-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 2,
+                "humidity": 43.1,
+                "linkquality": 40,
+                "temperature": 23.7,
+                "voc": 5,
+                "sensor": "K34-CO2",
+                "topic": "zigbee2mqtt/K34-CO2"
+            }
+        },
+        "K35-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 2,
+                "humidity": 43.1,
+                "linkquality": 40,
+                "temperature": 23.7,
+                "voc": 5,
+                "sensor": "K35-CO2",
+                "topic": "zigbee2mqtt/K35-CO2"
+            }
+        },
+        "K36-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 436,
+                "formaldehyd": 4,
+                "humidity": 52.2,
+                "linkquality": 76,
+                "temperature": 22.6,
+                "voc": 7,
+                "sensor": "K36-CO2",
+                "topic": "zigbee2mqtt/K36-CO2"
+            }
+        },
+        "K45-CO2": {
+            "state": "offline",
+            "data": {
+                "co2": 3,
+                "formaldehyd": 4,
+                "humidity": 53.1,
+                "linkquality": 54,
+                "temperature": 22.2,
+                "voc": 2,
+                "sensor": "K45-CO2",
+                "topic": "zigbee2mqtt/K45-CO2"
+            }
+        },
+        "K44-CO2": {
+            "state": "offline",
+            "data": {
+                "co2": 361,
+                "formaldehyd": 4,
+                "humidity": 47,
+                "linkquality": 43,
+                "temperature": 23.9,
+                "voc": 2,
+                "sensor": "K44-CO2",
+                "topic": "zigbee2mqtt/K44-CO2"
+            }
+        },
+        "K37-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 367,
+                "formaldehyd": 4,
+                "humidity": 60.4,
+                "linkquality": 123,
+                "temperature": 24.6,
+                "voc": 1,
+                "sensor": "K37-CO2",
+                "topic": "zigbee2mqtt/K37-CO2"
+            }
+        },
+        "K41-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 361,
+                "formaldehyd": 1,
+                "humidity": 59.7,
+                "linkquality": 123,
+                "temperature": 22.7,
+                "voc": 2,
+                "sensor": "K41-CO2",
+                "topic": "zigbee2mqtt/K41-CO2"
+            }
+        },
+        "K40-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 357,
+                "formaldehyd": 2,
+                "humidity": 49,
+                "linkquality": 61,
+                "temperature": 22.8,
+                "voc": 4,
+                "sensor": "K40-CO2",
+                "topic": "zigbee2mqtt/K40-CO2"
+            }
+        },
+        "K17-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 368,
+                "formaldehyd": 2,
+                "humidity": 66.3,
+                "linkquality": 47,
+                "temperature": 22.8,
+                "voc": 5,
+                "sensor": "K17-CO2",
+                "topic": "zigbee2mqtt/K17-CO2"
+            }
+        },
+        "K13-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 368,
+                "formaldehyd": 2,
+                "humidity": 66.3,
+                "linkquality": 47,
+                "temperature": 22.8,
+                "voc": 5,
+                "sensor": "K13-CO2",
+                "topic": "zigbee2mqtt/K13-CO2"
+            }
+        },
+        "K19-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 361,
+                "formaldehyd": 3,
+                "humidity": 41.4,
+                "linkquality": 43,
+                "temperature": 24.5,
+                "voc": 4,
+                "sensor": "K19-CO2",
+                "topic": "zigbee2mqtt/K19-CO2"
+            }
+        },
+        "K20-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 1,
+                "humidity": 59.4,
+                "linkquality": 123,
+                "temperature": 24.5,
+                "voc": 5,
+                "sensor": "K20-CO2",
+                "topic": "zigbee2mqtt/K20-CO2"
+            }
+        },
+        "K21-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 358,
+                "formaldehyd": 4,
+                "humidity": 58.8,
+                "linkquality": 123,
+                "temperature": 24.7,
+                "voc": 2,
+                "sensor": "K21-CO2",
+                "topic": "zigbee2mqtt/K21-CO2"
+            }
+        },
+        "K23-24-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 363,
+                "formaldehyd": 4,
+                "humidity": 60.8,
+                "linkquality": 40,
+                "temperature": 24.9,
+                "voc": 2,
+                "sensor": "K23-24-CO2",
+                "topic": "zigbee2mqtt/K23-24-CO2"
+            }
+        },
+        "K14-CO2": {
+            "state": "online",
+            "data": {
+                "co2": 360,
+                "formaldehyd": 4,
+                "humidity": 62.9,
+                "linkquality": 123,
+                "temperature": 23.2,
+                "voc": 2,
+                "sensor": "K14-CO2",
+                "topic": "zigbee2mqtt/K14-CO2"
+            }
+        }
+    }
+}

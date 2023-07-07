@@ -1,0 +1,24 @@
+[
+  {
+    "0018B21000008CF1": {
+      "data": {
+        "co2": 507,
+        "humidity": 47,
+        "temperature": 21.5,
+        "hardwareError": false,
+        "lowBattery": false
+      }
+    }
+  },
+  {
+    "0018B21000008C47": {
+      "data": {
+        "co2": 461.5,
+        "humidity": 42,
+        "temperature": 21.9,
+        "hardwareError": false,
+        "lowBattery": false
+      }
+    }
+  }
+]

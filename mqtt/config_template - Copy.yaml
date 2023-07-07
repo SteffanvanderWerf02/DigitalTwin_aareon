@@ -1,0 +1,16 @@
+- database:
+    host: hostname
+    db_name: db_name
+    user: admin
+    password: admin
+    port: port of db
+
+- facilitor: 
+    api_header: api_key_header
+    api_key: key
+
+- mqtt:
+    broker: 00.000.0.00
+    port: 0000
+    topic1: zigbee2mqtt/+
+    topic2: zigbee2mqtt/+/availability

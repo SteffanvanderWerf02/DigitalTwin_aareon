@@ -1,0 +1,327 @@
+:root {
+    --header-height: 92px;
+    --clr-main-200: #e8e8e8;
+    --clr-main-300: #60b0e6;
+    --clr-main-500: #30529c;
+    --clr-main-600: #243f7c;
+    --clr-main-700: #172b5c;
+    --clr-main-800: #102042;
+    --clr-acc-400: #cc5252;
+    --clr-acc-600: #198754;
+    --clr-txt-100: #ffffff;
+    --clr-txt-500: #707070;
+    --clr-txt-900: #000000;
+}
+.dropdown-toggle::after {
+    vertical-align: middle;
+}
+.header-icon {
+    font-size: 3rem;
+}
+
+.aareon-leftmenu-icons {
+    font-size: 7rem;
+    color: var(--clr-main-500);
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: white;
+    --bs-tooltip-color: black;
+    --bs-tooltip-max-width: 500px;
+}
+
+.tabsHeaderText {
+    color: #30529c;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.tooltip-inner {
+    text-align: start;
+    padding: 10px 30px 10px 30px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.474);
+}
+
+    .tooltip-inner p, .tooltip-inner span {
+        font-size: 16px;
+        margin: 0;
+    }
+
+.tooltipHeader {
+    margin-bottom: 0px;
+    color: #30529c;
+}
+
+.correct {
+    color: #198754;
+}
+
+.tooCold {
+    color: #0d6efd;
+}
+
+.incorrect {
+    color: #dc3545;
+    --clr-map-100: #8fed8f;
+    --clr-map-400: #ffa500;
+    --clr-map-800: #ff0000;
+    --clr-map-900: #707070;
+}
+
+/* ##### general START ##### */
+
+* {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    background: var(--clr-main-800);
+}
+
+body {
+    background: linear-gradient( 180deg, var(--clr-main-500) 0%, var(--clr-main-700) 90%, var(--clr-main-800) 100% );
+    height: 100vh;
+}
+
+header {
+    height: var(--header-height);
+}
+
+main {
+    min-height: calc(100% - var(--header-height));
+}
+
+.map-button-backgroundcolor {
+    background-color: var(--clr-main-500);
+}
+
+    .map-button-backgroundcolor:focus-visible,
+    .map-button-backgroundcolor:hover,
+    .map-button-backgroundcolor:focus,
+    .map-button-backgroundcolor:active {
+        background-color: #133d99 !important;
+    }
+
+.submit-button-backgroundcolor {
+    background-color: #60b0e6;
+    color: white;
+}
+
+    .submit-button-backgroundcolor:hover
+    .submit-button-backgroundcolor:focus-visible,
+    .submit-button-backgroundcolor:hover,
+    .submit-button-backgroundcolor:focus,
+    .submit-button-backgroundcolor:active {
+        background-color: #1a83ca !important;
+        color: white !important;
+    }
+
+    .submit-button-backgroundcolor .material-icons {
+        right: 10px;
+    }
+
+.add-icon {
+    font-size: 2rem;
+}
+
+.back-icon {
+    font-size: 3.2rem;
+}
+
+#togglePassword {
+    cursor: pointer;
+}
+
+.sidebar-background-color {
+    background-color: #e8e8e8;
+}
+
+.sidebar-text-color {
+    color: #30529c;
+}
+
+.bg-clr-main-500 {
+    background-color: var(--clr-main-500);
+}
+
+.bg-clr-main-300 {
+    background-color: var(--clr-main-300);
+}
+
+.bg-clr-acc-400 {
+    background-color: var(--clr-acc-400);
+}
+
+.bg-clr-main-200 {
+    background-color: var(--clr-main-200);
+}
+
+.bg-clr-acc-600 {
+    background-color: var(--clr-acc-600);
+}
+
+.txt-clr-main-100 {
+    color: var(--clr-txt-100);
+}
+
+.txt-clr-main-500 {
+    color: var(--clr-txt-500);
+}
+
+.txt-clr-main-700 {
+    color: var(--clr-main-700);
+}
+
+.txt-clr-acc-500 {
+    color: var(--clr-main-500);
+}
+
+.txt-clr-acc-400 {
+    color: var(--clr-acc-400);
+}
+
+.txt-clr-acc-600 {
+    color: var(--clr-acc-600);
+}
+
+.bdr-clr-main-500 {
+    border: 2px solid var(--clr-main-500);
+}
+
+.bdr-clr-acc-600 {
+    border: 2px solid var(--clr-acc-600);
+}
+
+.filter-overlay-red {
+    filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(0.8);
+}
+
+.filter-overlay-green {
+    filter: sepia(27%) saturate(5660%) hue-rotate(59deg);
+}
+
+.btn-main {
+    text-decoration: underline rgba(0, 0, 0, 0);
+}
+
+.btn-hover:hover {
+    color: var(--clr-txt-100);
+    background-color: var(--clr-main-600);
+    text-decoration: underline var(--clr-txt-100);
+    transition: text-decoration-color .15s, color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.btn-main:hover {
+    text-decoration: underline var(--clr-txt-100);
+    transition: text-decoration-color 0.15s, color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.btn-acc-600:hover {
+    background-color: var(--clr-acc-600);
+    color: var(--clr-txt-100);
+}
+
+.btn-acc-300:hover {
+    background-color: var(--clr-main-300);
+    color: var(--clr-txt-100);
+}
+
+.btn-hollow {
+    text-decoration: underline rgba(0, 0, 0, 0);
+}
+
+    .btn-hollow:hover {
+        color: var(--clr-txt-100);
+        background-color: var(--clr-main-600);
+        text-decoration: underline var(--clr-txt-100);
+        transition: text-decoration-color 0.15s, color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+
+.btn-main:active {
+    color: var(--clr-txt-100);
+}
+
+.rh-4 {
+    height: 2rem;
+}
+
+.rh-5 {
+    height: 2.5rem;
+}
+
+.rh-6 {
+    height: 3rem;
+}
+
+.rh-7 {
+    height: 3.5rem;
+}
+
+.rh-8 {
+    height: 4rem;
+}
+
+.inset-top-left {
+    top: 3rem;
+    left: 3rem;
+}
+
+.mw-90 {
+    max-width: 90%;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ##### general END ##### */
+
+.map-green {
+    fill: lightgreen;
+    fill-opacity: 0.5;
+}
+
+.map-red {
+    fill: red;
+    fill-opacity: 0.5;
+}
+
+.map-orange {
+    fill: orange;
+    fill-opacity: 0.5;
+}
+.badge.map-orange {
+    background-color: orange;
+    opacity: 1;
+}
+.map-yellow {
+    fill: #ffc107;
+    fill-opacity: 0.5;
+}
+
+.map-blue {
+    fill: #0d6efd;
+    fill-opacity: 0.5;
+}
+
+.map-gray {
+    fill: gray;
+    fill-opacity: 0.2;
+}
+
+.map-purple {
+    fill: #9d79ff;
+    fill-opacity: 0.5;
+}
+
+.bg-purple {
+    background-color: #9d79ff;
+}

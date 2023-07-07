@@ -1,0 +1,88 @@
+version: '1.2'
+name: aareon_dt
+services:
+  postgresdb:
+      profiles: ["production", "dev"]
+      container_name: postgresdb
+      image: postgres
+      restart: unless-stopped
+      environment:
+        TZ: Europe/Amsterdam
+        POSTGRES_USER: aareon
+        POSTGRES_PASSWORD: admin
+      volumes:
+      - ./postgresql/production/20_06_2023_facilitor_id_unique.sql:/docker-entrypoint-initdb.d/backup_dt_emmen.sql
+      ports:
+        - "5432:5432"
+
+  postgresdbTest:
+      profiles: ["test"]
+      container_name: postgresdb
+      image: postgres
+      restart: unless-stopped
+      environment:
+        TZ: Europe/Amsterdam
+        POSTGRES_USER: aareon
+        POSTGRES_PASSWORD: admin
+      volumes:
+      - ./postgresql/test/20_06_2023_facilitor_id_unique.sql:/docker-entrypoint-initdb.d/backup_dt_emmen.sql
+      ports:
+        - "5432:5432"
+
+  pgadmin:
+      profiles: ["dev"]
+      container_name: pgadmin
+      image: dpage/pgadmin4
+      restart: unless-stopped
+      environment:
+        PGADMIN_DEFAULT_EMAIL: admin@admin.com
+        PGADMIN_DEFAULT_PASSWORD: admin
+      ports:
+        - "8080:80"
+
+  # Digital twin Emmen - docker file
+  dt_emmen:
+    profiles: ["production", "test", "dev"]
+    restart: unless-stopped
+    container_name: dt_emmen
+    volumes:
+      - ../dt_aareon_emmen:/app
+    build:
+      context: ../dt_aareon_emmen
+      dockerfile: Dockerfile
+    depends_on:
+    - postgresdb
+    ports: 
+      - 443:443
+
+  # Digital twin Emmen testcases - docker file
+  dt_emmen_testcases:
+    profiles: ["test"]
+    restart: unless-stopped
+    container_name: dt_emmen_testcases
+    volumes:
+      - ../dt_aareon_emmen_testcases:/app
+    build:
+      context: ../dt_aareon_emmen_testcases
+      dockerfile: Dockerfile
+    depends_on:
+      - dt_emmen
+      - postgresdb
+
+  # python3 scripts for updating the mqtt data
+  # python3_scripts:
+  #   profiles: ["production", "dev"]
+  #   restart: unless-stopped
+  #   container_name: python-3-update-scripts
+  #   volumes:
+  #     - ../mqtt:/app
+  #   build:
+  #     context: ../mqtt
+  #     dockerfile: Dockerfile
+  #   depends_on:
+  #     - dt_emmen
+  #     - postgresdb
+
+
+
+

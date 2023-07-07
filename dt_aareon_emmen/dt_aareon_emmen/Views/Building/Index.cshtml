@@ -1,0 +1,136 @@
+@{
+    ViewData["Title"] = "Gebouwen overzicht";
+    Layout = "LayoutLeftMenu";
+}
+@* Content *@
+<div class="row g-0">
+    <div class="col-12">
+        <h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Gebouwen</h1>
+        @if (ViewBag.role == 2)
+        {
+            <a href="/Building/Create">
+                <span class="material-icons txt-clr-acc-500 add-icon align-middle mt-1">
+                    add_circle
+                </span>
+            </a>
+        }
+    </div>
+</div>
+<div class="row">
+    @if (ViewBag.buildings == null || !((IEnumerable<Dictionary<string, string>>)ViewBag.buildings).Any())
+    {
+        <p class="alert alert-info my-1">
+            Er zijn geen gebouwen beschikbaar
+        </p>
+    }
+    else 
+    {
+        @if (!string.IsNullOrEmpty(ViewBag.error))
+        {
+            <div class="col-12">
+                <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                    @ViewBag.error
+                    <button type="button" class="btn-close centered-icon" data-bs-dismiss="alert" aria-label="Close"></button>
+                </label>
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+        {
+            <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                @TempData["success"]
+                <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+            </label>
+        }
+        @foreach (var data in ViewBag.buildings)
+        {
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card">
+                    <a class="text-center" asp-controller="Building" asp-action="Map" asp-route-id=@data["id"]>
+                        @{
+                            if (data["path"] == "")
+                            {
+                                <img src="~/images/buildings/gebouwen.png" class="image-fluid object-fit-cover" style="height: 185px" alt="@data["name"]" />
+                            }
+                            else
+                            {
+                                <img src="@data["path"]" class="card-img-top object-fit-cover mw-100" alt="@data["name"]" style="height: 185px" />
+                            }
+                        }
+                    </a>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-10">
+                                <h3 class="card-title txt-clr-acc-500 d-inline-flex">@(data["name"] ?? "")</h3>
+                            </div>
+                            <div class="col-2 text-end my-auto p-0">
+                                @if (ViewBag.role == 2)
+                                {
+                                    <a class="z-2 position-relative" asp-controller="Building" asp-action="Edit" asp-route-id=@data["id"]>
+                                        <span class="material-icons card-title txt-clr-acc-500">edit</span>
+                                    </a>
+                                    @if (int.Parse(data["id"]) > 1)
+                                    {
+                                        <a class="z-2 position-relative" asp-controller="Building" asp-action="Delete" onclick="return confirm('Wil je het gebouw echt verwijderen?')" asp-route-id=@data["id"]>
+                                            <span class="material-icons card-title txt-clr-acc-500">delete</span>
+                                        </a>
+                                    }
+                                }
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Type:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>@data["type"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Bedrijf:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>@data["company"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Retentieperiode (dagen):</p>
+                            </div>
+                            <div class="col-6">
+                                <p>@data["retention_period"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Actieve bewegingssensoren:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>@data["active_motion_sensors"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p>Actieve CO2 sensoren:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>@data["active_co2_sensors"]</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn map-button-backgroundcolor w-100 text-white text-uppercase fw-bold w-100 stretched-link" asp-controller="Building" asp-action="Map" asp-route-id=@data["id"]>
+                                    Bekijk plattegrond
+                                    <span class="material-icons align-middle">
+                                        map
+                                    </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+</div>
+

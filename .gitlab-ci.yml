@@ -1,0 +1,36 @@
+stages:
+  - build
+  - test 
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker-compose -f Docker/docker-compose.yml --profile test up -d
+
+  only:
+  - merge_requests
+
+test:
+  stage: test
+  image: docker:latest
+  services:
+    - docker:dind
+
+  script:
+    - docker-compose -f Docker/docker-compose.yml --profile test up -d
+    - sleep 60
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.DatabaseTest
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.LoginTest
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.BuildingTest
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.RoomTest
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.SensorTest
+    - docker exec dt_emmen_testcases dotnet test --filter dt_aareon_emmen_testcases.UserTest
+
+  after_script:
+    - docker-compose -f Docker/docker-compose.yml down
+
+  only:
+    - merge_requests

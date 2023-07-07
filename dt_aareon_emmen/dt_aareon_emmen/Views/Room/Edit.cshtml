@@ -1,0 +1,82 @@
+@{
+	ViewData["Title"] = "Ruimte Bewerken";
+	Layout = "LayoutNoMenu";
+}
+
+<main class="d-flex">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="position-relative col-8 col-md-6 bg-white m-auto rounded-3 p-5">
+				<a href="/Room/Overview/@ViewBag.buildingId/" class="position-absolute">
+					<span class="material-icons back-icon txt-clr-acc-500">
+						arrow_circle_left
+					</span>
+				</a>
+				<div class="row m-auto mb-4">
+					<div class="col-12">
+						<h1 class="txt-clr-main-700 col-12 text-center fw-semibold">Ruimte bewerken - @ViewBag.roomNum</h1>
+					</div>
+				</div>
+				@using (Html.BeginForm("Edit", "Room", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				{
+					@if (!string.IsNullOrEmpty(ViewBag.error))
+					{
+						<div class="row">
+							<div class="col-12">
+								<div class="alert alert-danger alert-dismissible fade show" role="alert">
+									@ViewBag.error
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</div>
+						</div>
+					}
+					else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+					{
+						<label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+							@TempData["success"]
+							<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+						</label>
+					}
+					<div class="row">
+						<div class="mb-3">
+							<label for="coordinates" class="form-label fw-bold">
+								Coördinaten
+								<span data-bs-toggle="modal" data-bs-target="#drawModal" class="material-icons fs-5 align-middle card-title txt-clr-acc-500 pe-auto" style="cursor: pointer;">
+									edit
+								</span>
+							</label>
+							<input type="text" placeholder="47,8 131,8..." value='@ViewBag.roomInfo[0]["coordinates"]' class="form-control" name="coordinates" id="coordinates">
+						</div>
+
+						<div class="mb-3">
+							<label for="name" class="form-label fw-bold">Naam</label>
+							<input type="text" placeholder="Werkruimte" value='@ViewBag.roomInfo[0]["name"]' class="form-control" name="name" id="name">
+						</div>
+
+						<div class="mb-3">
+							<label for="image" class="form-label fw-bold">Plattegrond ruimte foto</label>
+							<input type="file" class="form-control" name="image" id="image">
+						</div>
+					</div>
+
+					<div class="row mt-4">
+						<div class="pt-2">
+							<input type="hidden" value='@ViewBag.roomInfo[0]["room_number"]' name="roomNumber">
+
+							<button value='@ViewBag.roomInfo[0]["building_id"]' name="buildingId" class="btn btn-main btn-acc-300 w-100 txt-clr-main-100 text-uppercase fw-bold position-relative submit-button-backgroundcolor" type="submit">
+								<span class="mx-auto">Bewerkeningen opslaan</span>
+								<span class="material-icons card-title align-middle">
+									edit
+								</span>
+							</button>
+						</div>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+	<script>
+		let src = '@(ViewBag.map[0]["map_path"])';
+	</script>
+	@Html.Partial("./Modal/DrawModal.cshtml")
+</main>

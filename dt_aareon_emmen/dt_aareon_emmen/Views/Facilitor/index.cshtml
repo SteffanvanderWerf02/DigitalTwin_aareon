@@ -1,0 +1,111 @@
+@{
+	ViewData["Title"] = "Overzicht sensoren met een Facilitor Key";
+	Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row g-0">
+	<div class="col-2">
+		<a href="/Sensor/Index/@ViewBag.buildingId/" class="position-absolute">
+			<span class="material-icons back-icon txt-clr-acc-500">
+				arrow_circle_left
+			</span>
+		</a>
+	</div>
+	<div class="col-8 text-center">
+		<h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Sensoren met een Facilitor key</h1>
+		<a asp-controller="Facilitor" asp-action="Create" asp-route-id='@ViewBag.buildingId'>
+			<span class="material-icons txt-clr-acc-500 add-icon align-middle">
+				add_circle
+			</span>
+		</a>
+	</div>
+	<div class="col-2 d-flex align-items-center">
+	@if (ViewBag.role == 2)
+		{
+			var buildingIdPath = ViewBag.buildingIdPath as IEnumerable<Dictionary<string, string>>;
+
+			if (buildingIdPath != null)
+			{
+				foreach (var data in buildingIdPath)
+				{
+					<a class="w-100 text-center bg-clr-main-500 rounded-3 text-white p-1 me-4 btn-main" asp-controller="Facilitor" asp-action="Index" asp-route-id='@data["id"]'>
+						Facilitor key
+					</a>
+				}
+			}
+		}
+	</div>
+</div>
+@if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+{
+	<label class="w-100 mt-3 rounded-3 alert alert-success alert-dismissible fade show">
+		@TempData["success"]
+		<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+	</label>
+}
+<div class="row">
+	<div class="col-12 overflow-auto" style="max-height:500px">
+		<div class="row">
+			<div class="col-12 mt-1 mb-1 ">
+				<input id="sensor-search" type="text" class="form-control" placeholder="Zoeken..." aria-label="search">
+			</div>
+		</div>
+		<table id="sensor-search-table" class="bg-clr-main-200 table rounded-3 m-0">
+			<tr class="border-secondary">
+				<th>ID</th>
+				<th>Sensor_id</th>
+				<th>Facilitor ID</th>
+				<th>Data type</th>
+				<th>Acties</th>
+			</tr>
+			<tbody>
+				@if (ViewBag.sensorsWithFacilitorKey == null || !((IEnumerable<Dictionary<string, string>>)ViewBag.sensorsWithFacilitorKey).Any())
+				{
+					<p class="alert alert-info my-1">
+						Er zijn geen sensoren die gekoppeld zijn met een facilitor key
+					</p>
+				}
+				else
+				{
+					var sensors = ((IEnumerable<Dictionary<string, string>>)ViewBag.sensorsWithFacilitorKey).OrderBy(sensor => int.Parse(sensor.GetValueOrDefault("id") ?? "0"));
+
+					foreach (var sensor in sensors)
+					{
+						<tr class="border-secondary">
+							<td>@(sensor.GetValueOrDefault("id"))</td>
+							<td>@(sensor.GetValueOrDefault("sensor_id"))</td>
+							<td>@(sensor.GetValueOrDefault("facilitor_id"))</td>
+							<td>@(sensor.GetValueOrDefault("type"))</td>
+							<td class="px-2">
+								<a href="@Url.Action("Edit", "Facilitor", new { facilitor_id = sensor.GetValueOrDefault("facilitor_id"), id = ViewBag.buildingId })">
+									<span class="material-icons align-middle">
+										edit
+									</span>
+								</a>
+								<a class="text-danger ms-3" href="/Facilitor/Delete/@ViewBag.buildingId/@(sensor.GetValueOrDefault("facilitor_id"))" onclick="return confirm('Weet u zeker dat u deze Facilitor key wilt verwijderen?')">
+									<span class="material-icons align-middle">
+										delete
+									</span>
+								</a>
+							</td>
+						</tr>
+					}
+				}
+			<tbody>
+		</table>
+	</div>
+</div>
+
+<!-- search table start -->
+<script>
+	$(function () {
+        $("#sensor-search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#sensor-search-table > tbody > tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+<!-- search table stop -->

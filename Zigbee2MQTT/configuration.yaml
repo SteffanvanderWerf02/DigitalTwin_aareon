@@ -1,0 +1,83 @@
+homeassistant: false
+permit_join: true
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://localhost
+serial:
+  port: >-
+    /dev/serial/by-id/usb-Silicon_Labs_Sonoff_Zigbee_3.0_USB_Dongle_Plus_0001-if00-port0
+advanced:
+  network_key:
+    - 39
+    - 33
+    - 239
+    - 64
+    - 241
+    - 60
+    - 156
+    - 181
+    - 75
+    - 146
+    - 236
+    - 134
+    - 217
+    - 246
+    - 87
+    - 55
+  homeassistant_legacy_entity_attributes: false
+  legacy_api: false
+  legacy_availability_payload: false
+frontend: true
+device_options:
+  legacy: false
+devices: {}
+availability:
+  active:
+    timeout: 10
+  passive:
+    timeout: 1500
+groups:
+  '2':
+    friendly_name: k2
+  '3':
+    friendly_name: k3
+  '4':
+    friendly_name: k4
+  '5':
+    friendly_name: k5
+  '6':
+    friendly_name: k6
+  '10':
+    friendly_name: k10
+  '11':
+    friendly_name: k11
+  '12':
+    friendly_name: k12
+  '15':
+    friendly_name: k15
+  '16':
+    friendly_name: k16
+  '18':
+    friendly_name: k18
+  '25':
+    friendly_name: Design_lab_XL
+  '38':
+    friendly_name: k38
+  '39':
+    friendly_name: k39
+  '42':
+    friendly_name: k42
+  '47':
+    friendly_name: k47
+  '48':
+    friendly_name: k48
+  '51':
+    friendly_name: k51
+  '53':
+    friendly_name: k53
+  '101':
+    friendly_name: Jacquardzaal
+  '102':
+    friendly_name: Leibnizzaal
+  '103':
+    friendly_name: Hollerithzaal

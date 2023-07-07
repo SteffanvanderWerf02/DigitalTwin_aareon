@@ -1,0 +1,297 @@
+@{
+	ViewData["Title"] = "Ruimte geschiedenis";
+	Layout = "LayoutNoMenu";
+}
+
+<main class="container-fluid" style="width: 90%; margin-bottom: 100px;">
+	<div class="bg-white rounded p-5">
+		<div class="row">
+			<div class="col-1 justify-content-lg-start justify-content-center d-flex">
+				<a href="/room/index/@ViewBag.RoomDetails[0]["building_id"]/@ViewBag.RoomDetails[0]["room_number"]">
+					<span class="material-icons back-icon txt-clr-acc-500">
+						arrow_circle_left
+					</span>
+				</a>
+			</div>
+			<div class="col-10 text-center">
+				<h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">
+					@ViewBag.RoomDetails[0]["room_number"] -
+					@ViewBag.RoomDetails[0]["name"]
+				</h1>
+			</div>
+			<div class="col-1 justify-content-lg-end justify-content-center d-flex">
+				<button class="btn btn-main btn-acc-600 bg-clr-acc-600 txt-clr-main-100" onclick="exportToCsv(`@ViewBag.BuildingName[0]["name"]-@ViewBag.RoomDetails[0]["room_number"]-data-export-${ new Date().toLocaleDateString() }.csv`)">
+					Exporteer
+				</button>
+			</div>
+		</div>
+		<div class="row mt-2 d-flex justify-content-center">
+			<div class="offset-lg-3 col-lg-6 col-12">
+				<input class="col-12 h-100 text-center" onchange="updateUrlData(document.getElementById('datetime').value)" id="datetime" type="text" name="datetimes" />
+			</div>
+			<div class="col-lg-3"></div>
+		</div>
+		<div class="row d-flex justify-content-center">
+			<div class="col-lg-2 col-12">
+				<button id="line-chart-button" class="col-12 mt-2 btn btn-hollow txt-clr-acc-500 bdr-clr-main-500" onclick="changeChart('bar');changeButton('line-chart-button', ['bar-chart-button'])">Staaf grafiek</button>
+				<button id="bar-chart-button" class="col-12 mt-2 btn btn-hollow txt-clr-main-100 bg-clr-main-500 bdr-clr-main-500" onclick="changeChart('line');changeButton('bar-chart-button', ['line-chart-button'])">Lijn grafiek</button>
+			</div>
+			<div class="col-lg-8 col-8 d-flex justify-content-center mb-2">
+				<canvas id="room_history_chart"></canvas>
+			</div>
+			<div class="col-lg-2"></div>
+		</div>
+	</div>
+</main>
+
+<script src="~/js/lib/chartjs-4.1.js"></script>
+
+<script>
+	let params = (new URL(document.location)).searchParams;
+	let motionData = @Html.Raw(Json.Serialize(ViewBag.motionData));
+	let co2TempHumData = @Html.Raw(Json.Serialize(ViewBag.co2TempHumidityData));
+	let pageLoadedOnce = false;
+	let maxCo2Value = 120;
+	let labels = [];
+
+	// Occupancy, co2, temperature, humidity
+	let chartValues = [[], [], [], []];
+	let backgroundColors = [[], [], [], []];
+
+	const red = 'rgb(128,0,0, 0.6)';
+	const redTransparent = 'rgb(128,0,0, 0.1)';
+	const green = 'rgb(0,128,0, 0.6)';
+	const greenTransparent = 'rgb(0,128,0, 0.1)';
+	const orange = 'rgba(255,165,0, 0.6)';
+	const blue = 'rgb(0,0,128, 0.6)';
+	const occupiedState = 2000.000001
+	const freeState = 1000.000002
+
+	if (params.get("startDate") && params.get("endDate")) {
+		$(function () {
+			$('input[name="datetimes"]').daterangepicker({
+				timePicker: true,
+				timePicker24Hour: true,
+				startDate: params.get("startDate"),
+				endDate: params.get("endDate"),
+				locale: {
+					format: 'YYYY-MM-DD H:mm'
+				}
+			});
+		});
+	} else {
+		var start = new Date().toISOString().slice(0, 10) + " 00:00:00";
+		var end = new Date().toISOString().slice(0, 10) + " 23:59:00";
+
+		window.location.href = `${window.location.href}?startDate=${start}&endDate=${end}`;
+	}
+
+	// Push motion data
+	if (motionData != null && motionData.length > 0) {
+		for ([key, val] of Object.entries(motionData)) {
+			labels.push(euDateTimeToUs(val.date));
+			if (parseInt(val.occupied) > 0) {
+				chartValues[0].push(occupiedState);
+				backgroundColors[0].push(redTransparent);
+			} else {
+				chartValues[0].push(freeState);
+				backgroundColors[0].push(greenTransparent);
+			}
+		}
+	} else if (co2TempHumData != null && co2TempHumData.length > 0) {
+		for ([key, val] of Object.entries(co2TempHumData)) {
+			labels.push(euDateTimeToUs(val.date));
+		}
+	}
+
+
+	// Push temperature, humidity & co2 values in an object
+	for ([key, val] of Object.entries(co2TempHumData)) {
+		chartValues[1].push(val.co2 / 10)
+		backgroundColors[1].push(blue)
+
+		if (maxCo2Value < val.co2 / 10) {
+			maxCo2Value = 200;
+		}
+
+		chartValues[2].push(val.temperature.replace(",", "."))
+		backgroundColors[2].push(red)
+
+		chartValues[3].push(val.huminity)
+		backgroundColors[3].push(orange)
+	}
+
+	// Chartjs segment for motion data
+	const up = (ctx, value) => ctx.p0.parsed.y < ctx.p1.parsed.y || ctx.p0.parsed.y == occupiedState && ctx.p1.parsed.y == occupiedState ? value : undefined;
+	const down = (ctx, value) => ctx.p0.parsed.y > ctx.p1.parsed.y || ctx.p0.parsed.y == freeState && ctx.p1.parsed.y == freeState ? value : undefined;
+
+	// Chartjs begin
+	// Config
+	var config = {
+		type: 'line',
+		data: {
+			labels: labels,
+			datasets: []
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: true,
+			scales: {
+				y: {
+					min: 10,
+					max: maxCo2Value,
+					ticks: {
+						display: true // This will remove only the label
+					},
+					type: 'logarithmic',
+				},
+				x: {
+					ticks: {
+						display: true, // This will remove only the label
+						autoSkip: true,
+						maxTicksLimit: 6
+					}
+				}
+			}
+		}
+	};
+
+	if (chartValues[0].length > 0) {
+		config.data.datasets.push({
+			label: "Bezetting",
+			data: chartValues[0],
+			backgroundColor: backgroundColors[0],
+			borderColor: green,
+			fill: true,
+			stepped: true,
+			segment: {
+				borderColor: ctx => down(ctx, greenTransparent) || up(ctx, redTransparent),
+				backgroundColor: ctx => down(ctx, greenTransparent) || up(ctx, redTransparent),
+			}
+		});
+	}
+
+	if (chartValues[1].length > 0 && chartValues[2].length > 0 && chartValues[3].length > 0) {
+		config.data.datasets.push({
+			label: "co2 (metings ppm / 10) ",
+			data: chartValues[1],
+			backgroundColor: backgroundColors[1],
+			borderColor: blue,
+			tension: 0.3,
+			fill: false,
+		},
+			{
+				label: "Temperatuur (°C)",
+				data: chartValues[2],
+				backgroundColor: backgroundColors[2],
+				borderColor: red,
+				tension: 0.3,
+				fill: false,
+			},
+			{
+				label: "Luchtvochtigheid (%)",
+				data: chartValues[3],
+				backgroundColor: backgroundColors[3],
+				borderColor: orange,
+				tension: 0.3,
+				fill: false,
+			});
+	}
+
+	var myChart = new Chart(
+		document.getElementById('room_history_chart'),
+		config
+	);
+
+	// chartjs end
+	function changeChart(chartType) {
+		config.type = chartType;
+
+		if (myChart) {
+			myChart.destroy();
+		}
+		myChart = new Chart(document.getElementById('room_history_chart'), config);
+	}
+
+	function updateUrlData(dateTime) {
+		dateTime = dateTime.split(" - ");
+		let currentPageNoParameters = window.location.href.split('?')[0];
+		let startDate = dateTime[0];
+		let endDate = dateTime[1];
+
+		if (pageLoadedOnce) {
+			window.location.href = `${currentPageNoParameters}?startDate=${startDate}&endDate=${endDate}`;
+		}
+		pageLoadedOnce = true;
+	}
+
+	function exportToCsv(filename) {
+		var csvClean = [["date"]];
+
+		if (motionData.length > 0) csvClean[0].push("occupied");
+		if (co2TempHumData.length > 0) csvClean[0].push("temperature in celsius", "humidity", "co2 (ppm)");
+		
+		for (let i = 0; i < Math.max(motionData.length, co2TempHumData.length); i++) {
+			var row = []
+
+			if(motionData.length > 0) {
+				row.push(motionData[i].date.toString());
+				row.push(motionData[i].occupied);
+			}
+
+			if(co2TempHumData.length > 0) {
+				if(motionData.length <= 0) {
+					row.push(co2TempHumData[i].date.toString());
+				}
+				row.push(co2TempHumData[i].temperature);
+				row.push(co2TempHumData[i].huminity);
+				row.push(co2TempHumData[i].co2);
+			}
+			
+			csvClean.push(row)
+		}
+		// Download csv file
+		downloadCSV(csvClean.join("\n"), filename);
+	}
+
+	function downloadCSV(csv, filename) {
+		var csvFile;
+		var downloadLink;
+
+		csvFile = new Blob([csv], { type: "text/csv" });
+		downloadLink = document.createElement("a");
+		downloadLink.download = filename;
+		downloadLink.href = window.URL.createObjectURL(csvFile);
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+	}
+
+	function euDateTimeToUs(dateTime) {
+		var result = dateTime;
+		// Regex matches for dd-mm-yyyy (EU format), if it is EU format, it returns the US date format (yyyy-mm-dd)
+		if (result.split(" ")[0].match("^([0-9]{2}-[0-9]{2}-[0-9]{4})$")) {
+			var dateTimeSplit = dateTime.split(" ")[0];
+			var dateSplit = dateTimeSplit.split("-")
+			result = `${dateSplit[2]}-${dateSplit[1]}-${dateSplit[0]} ${dateTime.split(" ")[1]}`
+		}
+		return result;
+	}
+
+	function changeButton(currentButtonId, buttonArrayIds) {
+
+		$("#" + currentButtonId).removeClass('txt-clr-acc-500');
+		$("#" + currentButtonId).addClass('bg-clr-main-500');
+		$("#" + currentButtonId).addClass('txt-clr-main-100');
+
+		for (i = 0; i < buttonArrayIds.length; i++) {
+			button = document.getElementById(buttonArrayIds[i]);
+
+			if ($("#" + buttonArrayIds[i]).hasClass('bg-clr-main-500')) {
+				$("#" + buttonArrayIds[i]).removeClass('bg-clr-main-500');
+				$("#" + buttonArrayIds[i]).removeClass('txt-clr-main-100');
+				$("#" + buttonArrayIds[i]).addClass('txt-clr-acc-500');
+			}
+		}
+	}
+</script>

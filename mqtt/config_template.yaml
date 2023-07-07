@@ -1,0 +1,16 @@
+- database:
+    host: postgresdb
+    db_name: aareon_dt
+    user: aareon
+    password: admin
+    port: 5432
+
+- facilitor: 
+    api_header: auth
+    api_key: -sNytXhoGd0f3kf0VQmC
+
+- mqtt:
+    broker: 10.100.3.245
+    port: 1883
+    topic1: zigbee2mqtt/+
+    topic2: zigbee2mqtt/+/availability

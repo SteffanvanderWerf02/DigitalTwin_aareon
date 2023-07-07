@@ -1,0 +1,72 @@
+@{
+    ViewData["Title"] = "Gebouw toevoegen";
+    Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row">
+    <div class="col-12">
+        <h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Gebouw toevoegen</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="mx-auto bg-clr-main-500 w-100 p-4 rounded-3" style="max-width: 500px;">
+            @using (Html.BeginForm("Create", "Building", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                @if (!string.IsNullOrEmpty(ViewBag.error))
+                {
+                    <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                        @ViewBag.error
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+                {
+                    <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                        @TempData["success"]
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }
+                <div class="mb-3">
+                    <label for="name" class="form-label text-white fw-bold">Naam</label>
+                    <input type="text" placeholder="Naam" class="form-control" name="name" id="name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="type" class="form-label text-white fw-bold">Type</label>
+                    <input type="text" placeholder="Type" class="form-control" name="type" id="type">
+                </div>
+
+                <div class="mb-3">
+                    <label for="company" class="form-label text-white fw-bold">Bedrijf</label>
+                    <input type="text" placeholder="Bedrijf" class="form-control" name="company" id="company">
+                </div>
+
+                 <div class="mb-3">
+                    <label for="retention_period" class="form-label text-white fw-bold">Retentieperiode</label>
+                    <input type="number" placeholder="Retentieperiode" class="form-control" name="retention_period" id="retention_period">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-label d-flex text-white fw-bold">Bedrijfsfoto&nbsp;-&nbsp;<span class="fst-italic fw-light">Optioneel</span></label>
+                    <input type="file" class="form-control" name="image" id="image">
+                </div>
+
+                <div class="mb-3">
+                    <label for="mapimage" class="form-label text-white fw-bold">Plattegrond</label>
+                    <input type="file" class="form-control" name="mapimage" id="mapimage">
+                </div>
+
+                <div class="mt-2">
+                    <button class="btn btn-main btn-acc-300 w-100 txt-clr-main-100 text-uppercase fw-bold position-relative submit-button-backgroundcolor" type="submit">
+                        <span class="mx-auto">Toevoegen</span>
+                        <span class="material-icons position-absolute">
+                            add_circle
+                        </span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

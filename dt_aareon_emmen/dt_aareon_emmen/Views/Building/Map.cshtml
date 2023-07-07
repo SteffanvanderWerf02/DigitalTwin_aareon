@@ -1,0 +1,224 @@
+@{
+	ViewData["Title"] = "Gebouw plattegrond";
+	Layout = "LayoutNoMenu";
+}
+
+<div class="container-fluid pb-4" style="width:90%">
+	<div class="row mb-3">
+		<div class="col-12 d-flex justify-content-center text-white">
+			<h1> @ViewBag.building[0]["name"] </h1>
+			@if (ViewBag.role == 2)
+			{
+				
+			}
+		</div>
+	</div>
+	<div class="row bg-white rounded">
+		<div class="col-12 rounded bg-white h-100 border-bottom p-0 overflow-auto">
+			<div class="row">
+				<div class="col-12">
+					<ul class="nav nav-tabs" role="tablist">
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText active" data-bs-toggle="tab" data-bs-target="#bezetting"
+									type="button" role="tab" aria-controls="bezetting" aria-selected="true">
+								Bezetting
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText" data-bs-toggle="tab" data-bs-target="#temperatuur"
+									type="button" role="tab" aria-controls="temperatuur" aria-selected="false">
+								Temperatuur
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText" data-bs-toggle="tab" data-bs-target="#co2"
+									type="button" role="tab" aria-controls="co2" aria-selected="false">
+								CO&sup2;
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText" data-bs-toggle="tab" data-bs-target="#humidity"
+									type="button" role="tab" aria-controls="humidity" aria-selected="false">
+								Luchtvochtigheid
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText" data-bs-toggle="tab" data-bs-target="#battery_co2"
+									type="button" role="tab" aria-controls="battery_co2" aria-selected="false">
+								CO&sup2; batterijen
+							</button>
+						</li>
+						<li class="nav-item" role="presentation">
+							<button class="nav-link tabsHeaderText" data-bs-toggle="tab" data-bs-target="#battery_motion"
+									type="button" role="tab" aria-controls="battery_motion" aria-selected="false">
+								Motion batterijen
+							</button>
+						</li>
+						@if (ViewBag.role == 2)
+						{	
+							<li class="nav-item my-auto" role="presentation">
+								<div class="dropdown">
+									<button class="btn btn-primary map-button-backgroundcolor dropdown-toggle fs-5 fw-bold" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+										Gebouw beheren
+									</button>
+									
+									<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+										<li>
+											<a class="dropdown-item" aria-selected="false" asp-controller="Room" asp-action="Create"asp-route-id='@ViewBag.buildingId'>
+												Ruimte toevoegen
+												<span class="material-icons align-middle">
+													add_circle
+												</span>
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-item" aria-selected="false" asp-controller="Sensor" asp-action="Index" asp-route-id='@ViewBag.buildingId'>
+												Sensoren overzicht
+											</a>
+										</li>
+										<li>
+											<a class="dropdown-item" aria-selected="false" asp-controller="Room" asp-action="Overview" asp-route-id='@ViewBag.buildingId'>
+												Ruimtes overzicht
+											</a>
+										</li>
+										<li><hr class="dropdown-divider"></li>
+										<li>
+											<button class="dropdown-item d-flex" aria-selected="false" data-bs-toggle="modal" data-bs-target="#exportModal">
+												Exporteer gebouw data
+												<span class="material-icons align-middle fs-5 ms-1 mt-1">
+													file_download
+												</span>
+											</button>
+										</li>
+									</ul>
+								</div>
+							</li>
+						}
+					</ul>
+				</div>
+			</div>
+			<div class="tab-content">
+				<div class="tab-pane fade show active" id="bezetting" role="tabpanel" aria-labelledby="bezetting">
+					@Html.Partial("./Maps/OccupancyMap.cshtml")
+				</div>
+
+				<div class="tab-pane fade" id="temperatuur" role="tabpanel" aria-labelledby="temperatuur">
+					@Html.Partial("./Maps/TemperatureMap.cshtml")
+				</div>
+
+				<div class="tab-pane fade" id="co2" role="tabpanel" aria-labelledby="co2">
+					@Html.Partial("./Maps/Co2Map.cshtml")
+				</div>
+
+				<div class="tab-pane fade" id="humidity" role="tabpanel" aria-labelledby="humidity">
+					@Html.Partial("./Maps/HumidityMap.cshtml")
+				</div>
+
+				<div class="tab-pane fade" id="battery_co2" role="tabpanel" aria-labelledby="battery_co2">
+					@Html.Partial("./Maps/Co2BatteryMap.cshtml")
+				</div>
+
+				<div class="tab-pane fade" id="battery_motion" role="tabpanel" aria-labelledby="battery_motion">
+					@Html.Partial("./Maps/MotionBatteryMap.cshtml")
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exportModalLabel">Exporteer gebouw data</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				@using (Html.BeginForm("Export", "Building", FormMethod.Post, new { enctype = "multipart/form-data" }))
+				{
+					<div class="modal-body">
+						<input class="col-12 form-control h-100 text-center" id="datetime" type="text" name="datetimes" />
+					</div>
+					<div class="modal-footer">
+						<button name="id" id="id" type="submit" class="btn text-white bg-success w-100 btn-success fw-bold d-flex justify-content-between align-items-center">
+							<span class="mx-auto">Data exporteren</span>
+							<span class="material-icons card-title">edit</span>
+						</button>
+					</div>
+				}
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script>
+	let motionData = @Html.Raw(Json.Serialize(ViewBag.motionData));
+	let co2TempHumData = @Html.Raw(Json.Serialize(ViewBag.co2TempHumidityData));
+
+	$(document).ready(function () {
+		if (@Html.Raw(Json.Serialize(ViewBag.startDate)) != null && @Html.Raw(Json.Serialize(ViewBag.endDate)) != null) {
+			//console.log(motionData); //Left for debugging purposes
+			//console.log(co2TempHumData); //Left for debugging purposes
+			exportToCsv("@ViewBag.building[0]["name"]-data-export-" + new Date().toLocaleDateString() + ".csv");
+		}
+	});
+
+	function updateMap(type) {
+		window.location.href = "#";
+	}
+
+	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+		return new bootstrap.Tooltip(tooltipTriggerEl)
+	});
+
+	$(function () {
+		$('input[name="datetimes"]').daterangepicker({
+			timePicker: true,
+			timePicker24Hour: true,
+			startDate: new Date().toISOString().slice(0, 10) + " 00:00:00",
+			endDate: new Date().toISOString().slice(0, 10) + " 23:59:00",
+			locale: {
+				format: 'YYYY-MM-DD H:mm'
+			}
+		});
+	});
+
+	function exportToCsv(filename) {
+		var csvClean = [["date", "room_number", "occupied", "temperature in celsius", "humidity", "co2 (ppm)"]];
+
+		for (let i = 0; i < motionData.length; i++) {
+			var row = [];
+			row.push(motionData[i].date.toString());
+			row.push(motionData[i].room_number);
+			row.push(motionData[i].occupied);
+
+			if (i < co2TempHumData.length) {
+				row.push(co2TempHumData[i].temperature);
+				row.push(co2TempHumData[i].huminity);
+				row.push(co2TempHumData[i].co2);
+			} else {
+				row.push(" ");
+				row.push(" ");
+				row.push(" ");
+			}
+
+			csvClean.push(row)
+		}
+
+		// Download csv file
+		downloadCSV(csvClean.join("\n"), filename);
+	}
+
+	function downloadCSV(csv, filename) {
+		var csvFile;
+		var downloadLink;
+
+		csvFile = new Blob([csv], { type: "text/csv" });
+		downloadLink = document.createElement("a");
+		downloadLink.download = filename;
+		downloadLink.href = window.URL.createObjectURL(csvFile);
+		downloadLink.style.display = "none";
+		document.body.appendChild(downloadLink);
+		downloadLink.click();
+	}
+</script>

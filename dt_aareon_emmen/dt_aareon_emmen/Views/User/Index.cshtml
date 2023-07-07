@@ -1,0 +1,88 @@
+@{
+    ViewData["Title"] = "Gebruikers overzicht";
+    Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row g-0">
+    <div class="col-12">
+        <h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Gebruikers</h1>
+        <a href="/User/Create">
+            <span class="material-icons txt-clr-acc-500 add-icon align-middle mt-1">
+                add_circle
+            </span>
+        </a>
+    </div>
+</div>
+@if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+{
+     <label class="w-100 mt-3 rounded-3 alert alert-success alert-dismissible fade show">
+        @TempData["success"]
+        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+    </label>
+}
+<div class="row">
+    <div class="col-12 overflow-auto" style="max-height:500px">
+        <div class="row">
+            <div class="col-12 mt-1 mb-1">
+                <input id="user-search" type="text" class="form-control" placeholder="Zoeken..." aria-label="search">
+            </div>
+        </div>
+        <div class="h-75 user-overview-table-wrapper">
+            <table id="user-search-table" class="bg-clr-main-200 table rounded-3">
+                <thead>
+                    <tr class="border-secondary">
+                        <th>Naam</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Acties</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.users != null)
+                    {
+                        @foreach (var item in ViewBag.users)
+                        {
+                            <tr class=" border-secondary">
+                                <td class="align-middle">@item["username"]</td>
+                                <td class="align-middle">@item["mail"]</td>
+                                <td class="align-middle">@item["name"]</td>
+                                @if (@item["name"].ToLower() == "administrator" && @item["mail"] == "arie.vanderdeijl@aareon.nl" ) {
+                                    <td></td>
+                                } else {
+                                    <td class="align-middle px-2">
+                                        <a asp-controller="User" asp-action="Edit" asp-route-email='@item["mail"]'>
+                                            <span class="material-icons align-middle">
+                                                edit
+                                            </span>
+                                        </a>
+                                        <a class="text-danger ms-3" asp-controller="User" onclick="return confirm('Weet u zeker dat u deze gebruiker wilt verwijderen?')" asp-action="Delete" asp-route-email='@item["mail"]'>
+                                            <span class="material-icons align-middle">
+                                                delete
+                                            </span>
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- search table start -->
+<script>
+
+    $(function () {
+        $("#user-search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#user-search-table > tbody > tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>
+<!-- search table stop -->

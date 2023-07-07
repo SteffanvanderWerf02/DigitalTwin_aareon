@@ -1,0 +1,19 @@
+{
+  "Database": {
+    "Username": "aareon",
+    "Password": "admin",
+    "Host": "postgresdb",
+    "DatabaseName": "aareon_dt",
+    "Port": "5432",
+    "ConnectionTest": {
+      "User": "administrator@aareon.nl"
+    }
+  },
+  "WebApp": {
+    "Protocol" : "https://",
+    "Username": "administrator@aareon.nl",
+    "Password": "betoeterd12$!",
+    "Server": "dt_emmen",
+    "Port": 443
+  }
+}

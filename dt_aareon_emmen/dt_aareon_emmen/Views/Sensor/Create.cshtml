@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "Sensor toevoegen";
+    Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row">
+    <div class="col-1 mb-5">
+        <a href="/Sensor/Index/@ViewBag.buildingId/" class="position-absolute">
+            <span class="material-icons back-icon txt-clr-acc-500">
+                arrow_circle_left
+            </span>
+        </a>
+    </div>
+    <div class="col-10 text-center">
+        <h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Sensor toevoegen</h1>
+    </div>
+</div> 
+
+<div class="row">
+    <div class="col-md-12 pb-5">
+        <div class="mx-auto bg-clr-main-500 w-100 p-4 rounded-3" style="max-width: 500px;">
+            @using (Html.BeginForm("Create", "Sensor", FormMethod.Post))
+            {
+                @if (!string.IsNullOrEmpty(TempData["error"]?.ToString()))
+                {
+                    <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                        @TempData["error"]
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }
+                else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+                {
+                    <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                        @TempData["success"]
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }
+
+                <div class="mb-3">
+                    <label for="roomNmr" class="form-label text-white fw-bold">Ruimtenummer</label>
+                    <select class="w-100 bg-white border border-0 rounded-3 py-2 px-2" name="roomNumber">
+                        @foreach (var item in ViewBag.rooms)
+                        {
+                            <option value='@item["room_number"]'>@item["room_number"]</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="friendlyName" class="form-label text-white fw-bold">Friendlyname</label>
+                    <input type="text" placeholder="Friendly name" class="form-control" name="friendlyName" id="friendlyName">
+                </div>
+
+                <div class="mb-3">
+                    <label for="serieNmr" class="form-label text-white fw-bold">Serienummer</label>
+                    <input type="text" placeholder="Serienummer" class="form-control" name="serialNumber" id="serieNmr">
+                </div>
+
+                <div class="mb-3">
+                    <label for="type" class="form-label text-white fw-bold">Sensortype</label>
+                    <select class="w-100 bg-white border border-0 rounded-3 py-2 px-2" name="typeId">
+                        @foreach (var item in ViewBag.sensorTypes)
+                        {
+                            <option value='@item["id"]'>@item["name"]</option>
+                        }
+                    </select>                
+                </div>    
+
+                @*<div class="mb-3">
+                    <label for="facilitorKey" class="form-label text-white fw-bold">Facilitor key toevoegen (Optioneel)</label>
+                    <input type="text" placeholder="Facilitor key" class="form-control" name="facilitorKey" id="facilitorKey">
+                </div>  
+
+                <div class="mb-3">
+                    <label for="dataType" class="form-label text-white fw-bold">Data type (Facilitor)</label>
+                    <select class="w-100 bg-white border border-0 rounded-3 py-2 px-2" name="dataTypeId">
+                        @foreach (var item in ViewBag.datatypes)
+                        {
+                            <option value='@item["id"]'>@item["type"]</option>
+                        }
+                    </select>     
+                </div>  *@              
+
+                <div class="mt-3">
+                    <button class="btn btn-main btn-acc-300 w-100 txt-clr-main-100 text-uppercase fw-bold position-relative submit-button-backgroundcolor" type="submit">
+                        <span class="mx-auto">Toevoegen</span>
+                        <span class="material-icons position-absolute">
+                            add_circle
+                        </span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div> 

@@ -1,0 +1,33 @@
+﻿<div class="modal fade" id="drawModal" tabindex="-1" aria-labelledby="drawModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="drawModalLabel">Ruimte Tekenen</h5>
+				<a target="_blank" class="mx-2" asp-controller="Room" asp-action="CoordinateInstructions" asp-route-buildingId=@ViewBag.buildingId>
+					<span class="fs-5 align-middle txt-clr-main-500 material-icons">
+						help
+					</span>
+				</a>
+				<button onclick="clearCanvas()" class="text-center bg-clr-main-500 rounded-3 text-white p-2 me-4 btn-main border-0">Legen</button>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+			</div>
+			<div class="modal-body overflow-auto d-flex justify-content-center">
+				@{
+					var imagePath = "./wwwroot/" + ViewBag.map[0]["map_path"]; // Replace with the actual path to your image file
+					int width = 900;
+
+					using (var image = SixLabors.ImageSharp.Image.Load(imagePath))
+					{
+						width = (int)Math.Round(((float)image.Width / (float)image.Height) * 578.0f);
+					}
+				}
+				<canvas class="shadow me-3 mb-3" style="height: calc(1156px/2)" id="myCanvas" width="@(width * 2)" height="1156"></canvas>
+				<script src="~/js/drawRoomModal.js"></script>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" onclick="clearCanvas()">Sluiten</button>
+				<button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="updateOutputString()">Coordinaten Opslaan</button>
+			</div>
+		</div>
+	</div>
+</div>

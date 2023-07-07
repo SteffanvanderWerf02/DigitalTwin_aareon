@@ -1,0 +1,113 @@
+@{
+	ViewData["Title"] = "Ruimte overzicht";
+	Layout = "LayoutLeftMenu";
+}
+@* Content *@
+<div class="row g-0">
+	<div class="col-1">
+		<a href="/Building/Map/@ViewBag.buildingId/" class="position-absolute">
+			<span class="material-icons back-icon txt-clr-acc-500">
+				arrow_circle_left
+			</span>
+		</a>
+	</div>
+	<div class="col-10 text-center">
+		<h1 class="txt-clr-acc-500 text-uppercase align-middle d-inline">Ruimtes - @ViewBag.buildingName</h1>
+		@if (ViewBag.role == 2)
+		{
+			var buildingIdPath = ViewBag.buildingIdPath as IEnumerable<Dictionary<string, string>>;
+
+			if (buildingIdPath != null)
+			{
+				foreach (var data in buildingIdPath)
+				{
+					<a asp-controller="Room" asp-action="Create" asp-route-id='@data["id"]'>
+						<span class="material-icons txt-clr-acc-500 add-icon align-middle">
+							add_circle
+						</span>
+					</a>
+				}
+			}
+		}
+	</div>
+</div>
+@if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+{
+	<label class="w-100 mt-3 rounded-3 alert alert-success alert-dismissible fade show">
+		@TempData["success"]
+		<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+	</label>
+}
+@if (!string.IsNullOrEmpty(TempData["error"]?.ToString()))
+{
+	<label class="w-100 mt-3 rounded-3 alert alert-danger alert-dismissible fade show">
+		@TempData["error"]
+		<button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+	</label>
+}
+<div class="row">
+	<div class="col-12 overflow-auto" style="max-height:500px">
+		<div class="row">
+			<div class="col-12 mt-1 mb-1 ">
+				<input id="room-search" type="text" class="form-control" placeholder="Zoeken..." aria-label="search">
+			</div>
+		</div>
+
+        <table id="room-search-table" class="bg-clr-main-200 table rounded-3 m-0">
+			<thead>
+                <tr class="border-secondary">
+                    <th>Ruimtenummer</th>
+                    <th>Coördinaten</th>
+                    <th>Ruimtenaam</th>
+                    <th>Acties</th>
+                </tr>
+                </thead>
+			<tbody>
+				@if (ViewBag.rooms == null || !((IEnumerable<Dictionary<string, string>>)ViewBag.rooms).Any())
+				{
+					<p class="alert alert-info my-1">
+						Er zijn geen ruimtes beschikbaar van dit gebouw
+					</p>
+				}
+				else 
+				{
+					@foreach (var room in ViewBag.rooms)
+					{
+						<tr class="border-secondary">
+							<td>@room["room_number"]</td>
+                            <td>@room["coordinates"]</td>
+							<td>@room["room_name"]</td>
+							<td class="px-2">
+                                <a asp-controller="Room" asp-action="Edit" asp-route-buildingId="@ViewBag.buildingId" asp-route-roomNum='@room["room_number"]'>
+                                    <span class="material-icons align-middle">
+										edit
+									</span>
+                                </a>
+                               <a class="text-danger ms-3" asp-controller="Room" onclick="return confirm('Weet u zeker dat u deze ruimte wilt verwijderen?')" asp-action="Delete" asp-route-buildingId="@ViewBag.buildingId" asp-route-roomNumber='@room["room_number"]'>
+                                    <span class="material-icons align-middle">
+										delete
+									</span>
+                                </a>
+							</td>
+						</tr>
+					}
+				}
+			<tbody>
+		</table>
+    </div>
+</div>
+
+<!-- search table start -->
+<script>
+
+    $(function () {
+        $("#room-search").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#room-search-table > tbody > tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+</script>
+<!-- search table stop -->

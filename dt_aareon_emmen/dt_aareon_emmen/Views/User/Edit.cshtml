@@ -1,0 +1,76 @@
+@model dt_aareon_emmen.Models.UserM
+
+@{
+    ViewData["Title"] = "Gebruiker bewerken";
+    Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+@if (ViewBag.InvalidEmail != null && ViewBag.InvalidEmail)
+{
+    <div class="col-12 text-center">
+        <h1>404: page not found</h1>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 class="txt-clr-acc-500 text-uppercase align-middle fw-semibold text-center text-md-start">Gebruiker bewerken</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="mx-auto bg-clr-main-500 w-100 p-5 rounded-3" style="max-width: 500px;">
+                @using (Html.BeginForm("Update", "User", FormMethod.Post))
+                {
+                    @if (!string.IsNullOrEmpty(ViewBag.error))
+                    {
+                        <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                            @ViewBag.error
+                            <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </label>
+                    }
+                    else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+                    {
+                        <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                            @TempData["success"]
+                            <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </label>
+                    }
+                    <div class="mb-3">
+                        <label for="email" class="form-label text-white fw-bold">E-mail</label>
+                        <input class="form-control pe-none" type="email" name="email" asp-for="Email" value="@ViewBag.email" readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="naam" class="form-label text-white fw-bold">Naam</label>
+                        <input class="form-control" type="text" name="naam" id="naam" placeholder="Naam..." asp-for="Username" value="@ViewBag.info[0]["username"]">
+                    </div>
+                    <div class="mb-3">
+                        <label for="role" class="form-label text-white fw-bold">Rol</label>
+                        <select class="form-control form-select" asp-for="Role" name="role">
+                            @foreach (var item in ViewBag.roles)
+                            {
+                                @if (ViewBag.info[0]["name"] == item["name"])
+                                {
+                                    <option value="@item["id"]" selected>@item["name"]</option>
+                                }
+                                else
+                                {
+                                    <option value="@item["id"]">@item["name"]</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="mt-2">
+                        <button class="btn w-100 btn-main text-uppercase fw-bold submit-button-backgroundcolor d-flex justify-content-between align-items-center" type="submit">
+                            <span class="mx-auto">Bewerkeningen opslaan</span>
+                            <span class="material-icons align-middle card-title">edit</span>
+                        </button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}

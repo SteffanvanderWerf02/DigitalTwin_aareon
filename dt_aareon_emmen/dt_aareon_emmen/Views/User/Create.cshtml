@@ -1,0 +1,60 @@
+@{
+    ViewData["Title"] = "Gebruiker toevoegen";
+    Layout = "LayoutLeftMenu";
+}
+
+@* Content *@
+<div class="row">
+    <div class="col-md-12 text-center">
+        <h1 class="txt-clr-acc-500 text-uppercase align-middle fw-semibold text-center text-md-start">Gebruiker toevoegen</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="mx-auto bg-clr-main-500 w-100 p-5 rounded-3" style="max-width: 500px;">
+            @using (Html.BeginForm("CreateUser", "User", FormMethod.Post))
+            {
+                @if (!string.IsNullOrEmpty(ViewBag.error))
+                {
+                    <label class="w-100 rounded-3 alert alert-danger alert-dismissible fade show">
+                        @ViewBag.error
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }else if (!string.IsNullOrEmpty(TempData["success"]?.ToString()))
+                {
+                    <label class="w-100 rounded-3 alert alert-success alert-dismissible fade show">
+                        @TempData["success"]
+                        <button type="button" class="btn-close top-0 bottom-0 my-auto" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </label>
+                }
+                <div class="mb-3">
+                    <label for="name" class="form-label text-white fw-bold">Naam</label>
+                    <input type="text" placeholder="Naam..." class="form-control" name="name" id="name">
+                </div>
+
+                <div class="mb-3">
+                    <label for="type" class="form-label text-white fw-bold">E-mailadres</label>
+                    <input type="text" placeholder="E-mail..." class="form-control" name="email" id="type">
+                </div>
+                <div class="mb-3">
+                    <label for="rol" class="form-label text-white fw-bold">Rol</label>
+                    <select class="w-100 bg-white border border-0 rounded-3 py-2 px-2" name="rol" id="rol">
+                        @foreach (var item in ViewBag.roles)
+                        {
+                            <option value=@item["id"]>@item["name"]</option>
+                        }
+                    </select>
+                </div>
+                <div class="pt-2">
+                    <button class="btn w-100 btn-main btn-acc-300 txt-clr-main-100 text-uppercase position-relative fw-bold submit-button-backgroundcolor d-flex justify-content-between align-items-center" type="submit">
+                        <span class="mx-auto">Toevoegen</span>
+                        <span class="material-icons position-absolute">
+                            add_circle
+                        </span>
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+@Html.Partial("Head.cshtml")
+<body>
+    @Html.Partial("Header.cshtml")
+    
+    <main class="container-fluid mw-90">
+        <div class="row mb-5">
+            @* Sidebar *@
+            <div class="col-12 col-md-2 rounded-start bg-clr-main-200 p-2">
+                <div class="row pt-5">
+                    <div class="col-md-12 text-center text-break">
+                        <a href="/Building/Index">
+                            <span class="material-icons align-middle aareon-leftmenu-icons">
+                                apartment
+                            </span>
+                            <p class="d-block fw-bold text-uppercase txt-clr-acc-500">Gebouwen</p>
+                        </a>
+                    </div>
+                </div>
+
+                @if (ViewBag.role == 2)
+                {
+                    <div class="row pt-5">
+                        <div class="col-md-12 text-center text-break">
+                            <a href="/User/Index">
+                                <span class="material-icons align-middle aareon-leftmenu-icons">
+                                    people
+                                </span>
+                                <p class="d-block fw-bold text-uppercase txt-clr-acc-500">
+                                    Gebruikers
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @* Content *@
+            <div class="col-12 col-md-10 rounded-end bg-white p-5">
+                @RenderBody()
+            </div>
+        </div>
+    </main>
+        
+    
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
