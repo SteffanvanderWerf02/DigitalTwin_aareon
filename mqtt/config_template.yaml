@@ -1,5 +1,5 @@
 - database:
-    host: postgresdb
+    host: postgresdb | localhost
     db_name: aareon_dt
     user: aareon
     password: admin
